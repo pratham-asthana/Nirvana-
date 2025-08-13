@@ -25,41 +25,57 @@ def text_from_pdf(pdf_path):
     except Exception as e:
         OCR(pdf_path)
 
-def resume_analyser(Extracted_text, JD):
-    from transformers import AutoTokenizer, AutoModel
-    import torch
-    import torch.nn.functional as F
+def clean_text(text):
+    import string
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    text = text.lower()
+    return text
 
-    #Using a pre-trained model called jobBERT
-    model_path = "jobBERT-model"
+def Tokens(text):
+    import nltk
+    from nltk.corpus import stopwords
+    from nltk.tokenize import word_tokenize
+    from nltk.stem import PorterStemmer
+    ps = PorterStemmer()
+    stop_words = set(stopwords.words('english'))
+    word_tokens = word_tokenize(text)
+    stemmed_words = [ps.stem(w) for w in word_tokens if w.lower() not in stop_words]
+    return stemmed_words
 
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
-    model = AutoModel.from_pretrained(model_path)
+def Keyword_Extraction_Resume(text):
+    from keybert import KeyBERT
+    kw_model = KeyBERT(model="all-MiniLM-L6-v2")  # Lightweight & fast embedding model
 
-    resume_text = Extracted_text
-    job_description = JD
+    keywords = kw_model.extract_keywords(
+        text, keyphrase_ngram_range=(1, 2), stop_words='english', top_n=20
+    )
+    skills = [kw for doc in keywords for kw, _ in doc]
+    return skills
 
-    inputs = tokenizer([resume_text, job_description],
-                    padding=True, truncation=True, return_tensors="pt")
+def Keyword_Extraction_JD(text):
+    from keybert import KeyBERT
+    kw_model = KeyBERT(model="all-MiniLM-L6-v2")  # Lightweight & fast embedding model
 
-    # Get embeddings
-    with torch.no_grad():
-        outputs = model(**inputs)
-        # Average pooling of token embeddings to get sentence embedding
-        embeddings = outputs.last_hidden_state.mean(dim=1)   #Using mean to use one vector to represent a whole sentence
+    keywords = kw_model.extract_keywords(
+        text, keyphrase_ngram_range=(1, 2), stop_words='english', top_n=15
+    )
+    skills = [kw for doc in keywords for kw, _ in doc]
+    return skills
 
-    # Compute cosine similarity
-    similarity = F.cosine_similarity(
-        embeddings[0].unsqueeze(0),
-        embeddings[1].unsqueeze(0)
-    ).item()  #unsqueeze function is for changing the shape of embeddings. It makes it (1, value) from just (value)
+def Matching_Missing(Resume_Skills, JD_Skills):
+    # Find overlaps and missing skills
+    matched_skills = list(set(Resume_Skills) & set( JD_Skills))
+    missing_skills = list(set(JD_Skills) - set(Resume_Skills))
+    other_skills = list(set(Resume_Skills) - set(JD_Skills))
+    return [matched_skills, missing_skills, other_skills]
 
-    # Convert to ATS score
-    ats_score = round(similarity * 100, 2)
-    return {
-        "Extracted_Text" : Extracted_text,
-        "Resume_Embeddings" : embeddings[0],
-        "JD_Embeddings" : embeddings[1],
-        "Similarity" : similarity,
-        "ATS_Score" : ats_score
-    }
+def ATS(Skills):
+    Matched_Skills = Skills[0]
+    Missing_Skills = Skills[1]
+    Other_Skills = Skills[2]
+    Required_Skills = len(Matched_Skills) + len(Missing_Skills)
+    Skill_Match_Score = len(Matched_Skills)/Required_Skills
+    Other_Skills_Score = len(Other_Skills)/Required_Skills
+    ATS = (Skill_Match_Score*0.7) + (Other_Skills_Score*0.3)
+    ATS = ATS*100
+    return ATS
