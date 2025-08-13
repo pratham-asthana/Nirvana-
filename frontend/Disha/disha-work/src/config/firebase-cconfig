@@ -1,0 +1,16 @@
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCRtsDmmllaeToYUtI9JdQNbYVYYJZVCIg",
+  authDomain: "hackquanta-e775b.firebaseapp.com",
+  projectId: "hackquanta-e775b",
+  storageBucket: "hackquanta-e775b.firebasestorage.app",
+  messagingSenderId: "926269979021",
+  appId: "1:926269979021:web:fafb53f6812793bf2a65c4",
+  measurementId: "G-6DF3BD2E7B",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
