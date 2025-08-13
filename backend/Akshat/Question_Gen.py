@@ -1,28 +1,14 @@
-def KeyBERT_Func(JD, Resume_Analysis_Result):
-    from keybert import KeyBERT
-    kw_model = KeyBERT(model="all-MiniLM-L6-v2")  # Lightweight & fast embedding model
+def Ques_Gen(difficulty, Matching_Skills, Missing_Skills, Other_Skills):
+    # Chatbot Using API
+    import os
+    from dotenv import load_dotenv
+    import google.generativeai as gen_ai
+    load_dotenv()
+    GOOGLE_API_KEY = os.getenv("Api_gemini")
 
-    Extracted_text = Resume_Analysis_Result.get("Extracted_Text")
-    resume_keywords = kw_model.extract_keywords(
-        Extracted_text, keyphrase_ngram_range=(1, 2), stop_words='english', top_n=15
-    )
-    jd_keywords = kw_model.extract_keywords(
-        JD, keyphrase_ngram_range=(1, 2), stop_words='english', top_n=15
-    )
-
-    # Extract just the keywords without relevance score
-    resume_skills = [kw for kw, i in resume_keywords]
-    jd_skills = [kw for kw, i in jd_keywords]
-
-    # Find overlaps and missing skills
-    matched_skills = list(set(resume_skills) & set(jd_skills))
-    missing_skills = list(set(jd_skills) - set(resume_skills))
-
-    Result = {"Similarity" : Resume_Analysis_Result.get("Similarity"),
-              "Resume_Skills" : resume_skills,
-              "JD_Skills" : jd_skills,
-              "Matched_Skills" : matched_skills,
-              "Missing_Skills" : missing_skills
-            }
-
-    return Result
+    #setting up the model. 
+    gen_ai.configure(api_key = GOOGLE_API_KEY)
+    model = gen_ai.GenerativeModel(model_name="gemini-1.5-flash")
+    prompt = "You are an HR interviewer. Generate 15 interview questions for a candidate, focusing on technical skills. Use the following inputs:- Difficulty level: {difficulty}, - Skills that the candidate has (matching the job description): {Matching_Skills}, - Skills that the candidate lacks but are required for the job: {Missing_Skills}, - Other skills mentioned in the candidate's resume: {Other_Skills}. Guidelines: 1. Maintain the tone of a real HR interview — professional, concise, and relevant. 2. Base questions primarily on the candidate’s skills and the job requirements. 3. Include: - Questions with difficulty aligned to the given difficulty level, - Questions testing the candidate’s strong skills, i.e.: {Matching_Skills}, - Questions exploring the lacking_skills to assess knowledge gaps, i.e.: {Missing_Skills}, - A few questions on other_skills to explore additional capabilities, i.e.: {Other_Skills}. 4. Avoid generic “Tell me about yourself” type questions; focus on technical depth. 5. Return the output as a numbered list, each question on a new line without extra commentary."
+    response = model.generate_content(prompt)
+    return response.text

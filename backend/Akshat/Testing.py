@@ -2,7 +2,7 @@ text = "Akshat New Delhi Artificial Intelligence and Machine Learning +91 888265
 JD = "Job Overview: We are looking for a passionate and motivated AI/ML Intern to join our team. You will work closely with experienced engineers and data scientists to design, develop, and implement machine learning models and AI-driven solutions. This internship will provide hands-on experience in data preprocessing, model training, evaluation, and deployment in real-world applications. Key Responsibilities: Assist in collecting, cleaning, and preprocessing datasets for machine learning tasks. Support in building, training, and evaluating ML/DL models using Python frameworks like TensorFlow, PyTorch, or Scikit-learn. Implement feature engineering and optimize models for performance. Work with APIs, cloud platforms (AWS, GCP, Azure), or local environments for model deployment. Research and experiment with state-of-the-art AI algorithms for assigned projects. Document processes, results, and maintain clear code repositories (Git). Collaborate with the team on brainstorming and prototyping AI-based solutions. Required Skills & Qualifications Pursuing a degree in Computer Science, AI/ML, Data Science, or related field. Basic understanding of machine learning algorithms (regression, classification, clustering, etc.). Familiarity with Python and libraries like Pandas, NumPy, Matplotlib. Exposure to deep learning frameworks (TensorFlow, Keras, PyTorch). Understanding of data preprocessing and model evaluation metrics. Problem-solving mindset and eagerness to learn. Preferred Skills (Good to Have) Knowledge of NLP, Computer Vision, or Reinforcement Learning. Experience with SQL/NoSQL databases. Exposure to cloud services (AWS Sagemaker, GCP AI Platform, Azure ML). Familiarity with version control (Git/GitHub). Benefits Hands-on experience with real-world AI/ML projects. Mentorship from experienced AI/ML professionals. Flexible work hours and a collaborative environment. Opportunity to contribute to published research or open-source projects."
 text_limit = 300
 JD_limit = 200
-'''
+
 def resume_analyser_jobbert(Extracted_text, JD):
     from transformers import AutoTokenizer, AutoModel
     import torch
@@ -41,6 +41,7 @@ def resume_analyser_jobbert(Extracted_text, JD):
         "Similarity" : similarity,
         "ATS_Score" : ats_score
     }
-'''
-from Connector import API_Resume_Analysis
-API_Resume_Analysis(text, JD)
+
+from Connector import API_NLP
+Data = API_NLP(text, JD, "Hard")
+print(Data)

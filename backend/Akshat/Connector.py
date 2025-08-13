@@ -2,8 +2,8 @@
 # API will be called to this python file. And then it will be connected in that manner.
 
 # API called for Resume Analysis with the pdf_path and JD
-def API_Resume_Analysis(Extracted_text, JD):
-    from Resume_Analysis import text_from_pdf, OCR, Tokens, clean_text, Keyword_Extraction_Resume, Keyword_Extraction_JD, Matching_Missing, ATS
+def API_NLP(Extracted_text, JD, difficulty):
+    from Resume_Analysis import Tokens, clean_text, Keyword_Extraction_Resume, Keyword_Extraction_JD, Matching_Missing, ATS
     #Extracted_text = text_from_pdf(pdf_path)
     Extracted_text = clean_text(Extracted_text)
     JD = clean_text(JD)
@@ -13,9 +13,19 @@ def API_Resume_Analysis(Extracted_text, JD):
     JD_Skills = Keyword_Extraction_JD(JD)
     Skills = Matching_Missing(Resume_Skills, JD_Skills)
     ATS_Score = ATS(Skills)
-    print(ATS_Score)
+    # Resume Analysis Done
 
-#API called for Question Generation with JD, and Resume_Analysis 
-def API_Question_Generation(JD, Resume_Analysis):
-    from Question_Gen import KeyBERT_Func
-    Prompt = KeyBERT_Func()
+    # Question Generation
+    from Question_Gen import Ques_Gen
+    Questions = Ques_Gen(difficulty, Skills[0], Skills[1], Skills[2])
+
+    Analysis = {
+        "Extracted_text" : Extracted_text,
+        "JD" : JD,
+        "Resume_Skills" : Resume_Skills,
+        "JD_Skills" : JD_Skills,
+        "Skills" : Skills,
+        "ATS_Score" : ATS_Score,
+        "Questions" : Questions
+    }
+    return Analysis
