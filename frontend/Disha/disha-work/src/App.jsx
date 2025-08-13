@@ -1,10 +1,11 @@
+
 import "./App.css";
-import VideoAudio from "./Video-audio/VideoAudio";
+import RecordingPage from "./RecordingPage";
 
 function App() {
   return (
     <div>
-      <VideoAudio />
+      <RecordingPage />
     </div>
   );
 }
