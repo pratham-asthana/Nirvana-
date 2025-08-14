@@ -1,6 +1,6 @@
 .about-section {
   padding: 80px 10px;
-  background: linear-gradient(135deg, #f8f9ff 30%, #eef1ff 100%);
+  background: linear-gradient(135deg, #eef1ff 20%, #f8f9ff 90%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,7 +69,6 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
   margin-bottom: 20px;
   letter-spacing: 1px;
 }
