@@ -1,0 +1,79 @@
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e1e2f;
+  padding: 15px 35px;
+}
+.logo {
+  font-size: 1.6em;
+  font-weight: bold;
+  background: linear-gradient(90deg, #6a5acd, #8a2be2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+.nav-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #8a2be2;
+  transition: width 0.3s ease;
+}
+.nav-links a:hover {
+  color: #8a2be2;
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+}
+.btn {
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Sign Up - outlined */
+.btn-outline {
+  border: 2px solid #8a2be2;
+  color: #8a2be2;
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: #8a2be2;
+  color: #fff;
+}
+
+/* Sign In - primary (highlighted) */
+.btn-primary {
+  background: linear-gradient(90deg, #6a5acd, #8a2be2);
+  color: #fff;
+  border: 2px solid transparent;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #5f4bb6, #751ed9);
+}
