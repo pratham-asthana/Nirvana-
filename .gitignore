@@ -14,3 +14,17 @@ backend/Akshat/Vosk_model/conf/model.conf
 backend/Akshat/Vosk_model/conf/mfcc.conf
 backend/Akshat/Vosk_model/am/final.mdl
 backend/Akshat/STT_Sample.wav
+backend/Akshat/vosk-model-small-en-us-0.15/README
+backend/Akshat/vosk-model-small-en-us-0.15/ivector/splice.conf
+backend/Akshat/vosk-model-small-en-us-0.15/ivector/online_cmvn.conf
+backend/Akshat/vosk-model-small-en-us-0.15/ivector/global_cmvn.stats
+backend/Akshat/vosk-model-small-en-us-0.15/ivector/final.mat
+backend/Akshat/vosk-model-small-en-us-0.15/ivector/final.ie
+backend/Akshat/vosk-model-small-en-us-0.15/ivector/final.dubm
+backend/Akshat/vosk-model-small-en-us-0.15/graph/phones/word_boundary.int
+backend/Akshat/vosk-model-small-en-us-0.15/graph/HCLr.fst
+backend/Akshat/vosk-model-small-en-us-0.15/graph/Gr.fst
+backend/Akshat/vosk-model-small-en-us-0.15/graph/disambig_tid.int
+backend/Akshat/vosk-model-small-en-us-0.15/conf/model.conf
+backend/Akshat/vosk-model-small-en-us-0.15/conf/mfcc.conf
+backend/Akshat/vosk-model-small-en-us-0.15/am/final.mdl

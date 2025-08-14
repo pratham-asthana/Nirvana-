@@ -30,10 +30,10 @@ def API_NLP(Extracted_text, JD, difficulty):
     }
     return Analysis
 
-def API_QNA(User_Answer_Audio, Question):
+def API_QNA(User_Answer_Audio, Question, Vosk_Path):
     from Correctness_Analysis import Answer_Analysis
     from STT import Speech_To_Text
-    User_Answer = Speech_To_Text(User_Answer_Audio)
+    Speech_To_Text(User_Answer_Audio, Vosk_Path)
     # Measure = Answer_Analysis(User_Answer, Question)
     # return Measure
-    return User_Answer
+    # return User_Answer

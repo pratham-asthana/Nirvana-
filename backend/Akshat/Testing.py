@@ -4,7 +4,8 @@ Difficulty = "hard"
 Question = "Imagine you're tasked with building a machine learning model to predict customer churn for a subscription-based service. What are the key steps you would take, from initial data exploration to deploying the final model? Walk me through your process, and be sure to highlight the potential challenges you might face at each stage and how you would address them."
 User_Answer = "My approach to a customer churn problem would begin with data exploration to understand the features and handle issues like imbalanced data through techniques like SMOTE. I would then engineer new features, such as customer tenure and usage frequency, using domain knowledge to create strong predictors. For model selection, I'd likely start with XGBoost or LightGBM and focus on metrics like precision and recall, as these are more informative than simple accuracy in churn prediction. After training with cross-validation, I would evaluate the model's performance and use tools like SHAP to interpret its predictions, which provides actionable insights for the business. The final step would be deploying the model and setting up monitoring to track for potential model drift and ensure long-term effectiveness."
 Question_2 = "You've built a model that has great performance on your validation set, but when it's deployed to production, its performance starts to degrade over time. What could be causing this, and what steps would you take to diagnose and solve the problem?"
-User_Answer_Audio = "STT_Testing.wav"
+User_Answer_Audio = r"C:\Users\akshat\Desktop\python projects\Projects\Nirvana-\backend\Akshat\STT_Sample.wav"
+Vosk_Path = r"C:\Users\akshat\Desktop\python projects\Projects\Nirvana-\backend\Akshat\vosk-model-small-en-us-0.15"
 # text_limit = 300
 # JD_limit = 200
 
@@ -52,5 +53,5 @@ def resume_analyser_jobbert(Extracted_text, JD):
 
 from Connector import API_QNA
 
-Measure = API_QNA(User_Answer_Audio, Question_2)
-print(Measure)
+API_QNA(User_Answer_Audio, Question_2, Vosk_Path)
+# print(Measure)
