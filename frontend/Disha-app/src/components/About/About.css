@@ -1,0 +1,107 @@
+.about-section {
+  padding: 80px 10px;
+  background: linear-gradient(135deg, #f8f9ff 30%, #eef1ff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  width: 100%;
+}
+
+.about-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 44px;
+  max-width: 1100px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.about-image-card {
+  flex: 1 1 340px;
+  perspective: 1200px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 320px;
+  max-width: 400px;
+  height: 330px;
+}
+
+.about-img {
+  width: 320px;
+  height: 220px;
+  border-radius: 28px;
+  box-shadow: 0 24px 48px rgba(106,90,205,0.12), 0 2px 16px rgba(106,90,205,0.18);
+  transform: rotateY(-15deg) rotateX(4deg) scale(1.09);
+  transition: transform 0.7s cubic-bezier(.22,.61,.36,1),
+              box-shadow 0.7s cubic-bezier(.22,.61,.36,1);
+  will-change: transform;
+  background: #fafaff;
+}
+.about-section.visible .about-img {
+  transform: rotateY(0deg) rotateX(0deg) scale(1.07);
+  box-shadow: 0 10px 36px rgba(106,90,205,0.16), 0 1px 10px rgba(106,90,205,0.17);
+}
+
+.about-text-card {
+  flex: 2 1 360px;
+  padding: 32px 24px;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(12px);
+  border-radius: 22px;
+  box-shadow: 0 6px 24px rgba(106,90,205,0.10);
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.1s cubic-bezier(.23,.69,.31,1),
+              transform 1.1s cubic-bezier(.23,.69,.31,1);
+}
+.about-section.visible .about-text-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-title {
+  font-size: 2.5em;
+  font-weight: 700;
+  background: linear-gradient(90deg, #6a5acd, #8a2be2 90%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.about-text {
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: #383868;
+  margin: 0;
+}
+
+@media (max-width: 950px) {
+  .about-layout {
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+  .about-image-card, .about-text-card {
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .about-img {
+    width: 95vw;
+    max-width: 320px;
+    height: auto;
+  }
+  .about-text-card {
+    padding: 22px 12px;
+  }
+  .about-title {
+    font-size: 2em;
+  }
+}
