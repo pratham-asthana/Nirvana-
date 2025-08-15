@@ -8,51 +8,10 @@ User_Answer_Audio = r"C:\Users\akshat\Desktop\python projects\Projects\Nirvana-\
 Vosk_Path = r"C:\Users\akshat\Desktop\python projects\Projects\Nirvana-\backend\Akshat\vosk-model-small-en-us-0.15"
 # text_limit = 300
 # JD_limit = 200
-
-def resume_analyser_jobbert(Extracted_text, JD):
-    from transformers import AutoTokenizer, AutoModel
-    import torch
-    import torch.nn.functional as F
-
-    #Using a pre-trained model called jobBERT
-    model_path = r"C:\Users\akshat\jobbert_model"
-
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
-    model = AutoModel.from_pretrained(model_path)
-
-    resume_text = Extracted_text
-    job_description = JD
-
-    inputs = tokenizer([resume_text, job_description],
-                    padding=True, truncation=True, return_tensors="pt")
-
-    # Get embeddings
-    with torch.no_grad():
-        outputs = model(**inputs)
-        # Average pooling of token embeddings to get sentence embedding
-        embeddings = outputs.last_hidden_state.mean(dim=1)   #Using mean to use one vector to represent a whole sentence
-
-    # Compute cosine similarity
-    similarity = F.cosine_similarity(
-        embeddings[0].unsqueeze(0),
-        embeddings[1].unsqueeze(0)
-    ).item()  #unsqueeze function is for changing the shape of embeddings. It makes it (1, value) from just (value)
-
-    # Convert to ATS score
-    ats_score = round(similarity * 100, 2)
-    return {
-        "Extracted_Text" : Extracted_text,
-        "Resume_Embeddings" : embeddings[0],
-        "JD_Embeddings" : embeddings[1],
-        "Similarity" : similarity,
-        "ATS_Score" : ats_score
-    }
-
 # from Connector import API_NLP
 # Data = API_NLP(text, JD, Difficulty)
 
 from Connector import API_QNA
 
-Answer = API_QNA(User_Answer_Audio, Question_2,)
-# print(Measure)
-print(Answer)
+Measure = API_QNA(User_Answer_Audio, Question_2,)
+print(Measure)

@@ -1,0 +1,24 @@
+# Core requirements
+torch                   # For GPU acceleration (install CUDA-specific version if needed)
+ffmpeg-python           # Python wrapper for ffmpeg (ffmpeg itself must be installed & added to PATH)
+
+# Whisper (OpenAI speech recognition)
+openai-whisper
+
+# OCR
+pytesseract
+pdf2image
+pdfplumber
+
+# NLP and keyword extraction
+nltk
+keybert
+sentence-transformers    # Needed for KeyBERT to use all-MiniLM-L6-v2
+
+# Environment variables
+python-dotenv
+
+# Google Gemini API
+google-generativeai
+
+# Standard libraries (string, os) are built into Python, no need to install
