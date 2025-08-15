@@ -27,7 +27,7 @@ def Speech_To_Text_2(AUDIO_FILE, MODEL_PATH):
         final_result = json.loads(rec.FinalResult())
         return ("\nFinal Transcript:", final_result.get("text", ""))
 
-def Speech_To_Text(AUDIO_FILE, MODEL_PATH):
+def STT_Vosk(AUDIO_FILE, MODEL_PATH):
     import wave, json, audioop
     from vosk import Model, KaldiRecognizer, SetLogLevel
 
@@ -49,3 +49,15 @@ def Speech_To_Text(AUDIO_FILE, MODEL_PATH):
                 print(json.loads(rec.Result())["text"])
 
         print(json.loads(rec.FinalResult())["text"])
+
+def Speech_To_Text(AUDIO_FILE):
+    import whisper
+
+    # Load the "base" model
+    model = whisper.load_model("base")
+
+    # Transcribe an audio file
+    result = model.transcribe(AUDIO_FILE)
+
+    # Print recognized text
+    return result

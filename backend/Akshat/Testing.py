@@ -53,5 +53,6 @@ def resume_analyser_jobbert(Extracted_text, JD):
 
 from Connector import API_QNA
 
-API_QNA(User_Answer_Audio, Question_2, Vosk_Path)
+Answer = API_QNA(User_Answer_Audio, Question_2,)
 # print(Measure)
+print(Answer)
