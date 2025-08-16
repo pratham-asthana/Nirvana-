@@ -1,0 +1,73 @@
+.instructions-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+  gap: 11px;
+}
+.instructions-header > h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  background: linear-gradient(to right, blue, rgb(126, 126, 208));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.instructions-header > h5 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #555;
+  text-align: center;
+}
+.instructions-main-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+.instruction-1 {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+  width: 70%;
+  background-color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 400px;
+  padding-left: 0px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.instruction-1:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(194, 194, 228);
+}
+.serial-no-div {
+  background-color: blue;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  padding-top: 7px;
+  color: white;
+  font-weight: bold;
+}
+.instruction-text-main-div {
+  display: flex;
+  flex-direction: column;
+}
+.instruction-text-header-div {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.instruction-text-header-div > h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
