@@ -1,6 +1,10 @@
 import React from "react";
 import "./Instructions.css";
 import { LuLaptop } from "react-icons/lu";
+import { IoLocationOutline } from "react-icons/io5";
+import { MdOutlineVerifiedUser } from "react-icons/md";
+import { FaRegCommentAlt } from "react-icons/fa";
+import { HiOutlinePaperAirplane } from "react-icons/hi";
 
 const Instructions = () => {
   return (
