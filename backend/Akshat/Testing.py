@@ -13,5 +13,9 @@ Vosk_Path = r"C:\Users\akshat\Desktop\python projects\Projects\Nirvana-\backend\
 
 from Connector import API_QNA
 
-Measure = API_QNA(User_Answer_Audio, Question_2,)
+#from Connector import API_NLP
+#analysis = API_NLP(text, JD, Difficulty)
+#print(analysis)
+
+Measure = API_QNA(User_Answer, Question_2)
 print(Measure)

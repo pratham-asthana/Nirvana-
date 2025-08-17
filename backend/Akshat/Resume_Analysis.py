@@ -79,3 +79,5 @@ def ATS(Skills):
     ATS = (Skill_Match_Score*0.7) + (Other_Skills_Score*0.3)
     ATS = ATS*100
     return ATS
+
+# Use Mistral AI and Ollama

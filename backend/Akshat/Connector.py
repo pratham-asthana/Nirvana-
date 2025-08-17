@@ -11,13 +11,16 @@ def API_NLP(Extracted_text, JD, difficulty):
     JD = Tokens(JD)
     Resume_Skills = Keyword_Extraction_Resume(Extracted_text)
     JD_Skills = Keyword_Extraction_JD(JD)
+    print(Resume_Skills)
+    print(JD_Skills)
     Skills = Matching_Missing(Resume_Skills, JD_Skills)
+
     ATS_Score = ATS(Skills)
     # Resume Analysis Done
 
     # Question Generation
-    from Question_Gen import Ques_Gen
-    Questions = Ques_Gen(difficulty, Skills[0], Skills[1], Skills[2])
+    # from Question_Gen import Ques_Gen
+    # Questions = Ques_Gen(difficulty, Skills[0], Skills[1], Skills[2])
 
     Analysis = {
         "Extracted_text" : Extracted_text,
@@ -30,9 +33,9 @@ def API_NLP(Extracted_text, JD, difficulty):
     }
     return Analysis
 
-def API_QNA(User_Answer_Audio, Question):
+def API_QNA(User_Answer, Question):
     from Correctness_Analysis import Answer_Analysis
-    from STT import Speech_To_Text
-    User_Answer = Speech_To_Text(User_Answer_Audio)
+    # from STT import Speech_To_Text
+    # User_Answer = Speech_To_Text(User_Answer_Audio)
     Measure = Answer_Analysis(User_Answer, Question)
     return Measure
