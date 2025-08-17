@@ -72,6 +72,11 @@ const Instructions = () => {
           );
         })}
       </div>
+      <div className="checkbox-div">
+        <input type="checkbox"></input>
+        <label>I have read the instructions carefully</label>
+      </div>
+      <button>Start Interview</button>
     </>
   );
 };

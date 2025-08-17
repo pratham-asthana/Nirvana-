@@ -31,8 +31,10 @@
 .instruction-1 {
   display: flex;
   gap: 20px;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   margin-top: 20px;
+  margin-bottom: 20px;
   width: 70%;
   background-color: white;
   padding-top: 20px;
@@ -55,6 +57,8 @@
   padding-top: 7px;
   color: white;
   font-weight: bold;
+  min-width: 32px;
+  text-align: center;
 }
 .instruction-text-main-div {
   display: flex;
