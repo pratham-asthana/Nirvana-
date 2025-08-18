@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Instructions.css";
 import { LuLaptop } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { HiOutlinePaperAirplane } from "react-icons/hi";
+import { MdOutlineDangerous } from "react-icons/md";
 import { db } from "../config/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -17,6 +19,15 @@ const iconMap = {
 };
 
 const Instructions = () => {
+  const [checked, setChecked] = useState(false);
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    if (checked) {
+      navigate("/interview");
+    }
+  };
+
   const [instructions, setInstructions] = useState([]);
 
   useEffect(() => {
@@ -72,11 +83,81 @@ const Instructions = () => {
           );
         })}
       </div>
-      <div className="checkbox-div">
-        <input type="checkbox"></input>
-        <label>I have read the instructions carefully</label>
+      <div className="important-note-main-div">
+        <div className="important-note-icon-outer-div">
+          <div className="important-note-icon-div">
+            <MdOutlineDangerous size={"28px"} color="white" />
+          </div>
+        </div>
+        <div>
+          <h3>Important Note</h3>
+          <li>Keep your device charged or connected to power.</li>
+          <li>Once started, the interview cannot be paused.</li>
+          <li>Make sure you are alone and undisturbed.</li>
+        </div>
       </div>
-      <button>Start Interview</button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          padding: "16px",
+          gap: "0",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: "12px",
+            width: "70%",
+            padding: "16px",
+          }}
+        >
+          <input
+            type="checkbox"
+            id="read-instructions"
+            checked={checked}
+            onChange={(e) => setChecked(e.target.checked)}
+            style={{
+              width: "14px",
+              height: "14px",
+              marginRight: "12px",
+              borderRadius: "10%",
+              border: "1px solid blue",
+            }}
+          ></input>
+          <label
+            htmlFor="read-instructions"
+            style={{
+              fontSize: "15px",
+              cursor: "pointer",
+              paddingBottom: "10px",
+            }}
+          >
+            I have read the instructions carefully.
+          </label>
+        </div>
+        <button
+          onClick={handleStart}
+          disabled={!checked}
+          style={{
+            background: checked ? "green" : "#e0e0e0",
+            color: checked ? "#fff" : "#bdbdbd",
+            border: "none",
+            borderRadius: "8px",
+            padding: "16px 48px",
+            fontSize: "20px",
+            fontWeight: "500",
+            cursor: checked ? "pointer" : "not-allowed",
+            boxShadow: checked ? "0 2px 8px rgba(127,214,167,0.15)" : "none",
+            transition: "background 0.2s, color 0.2s",
+          }}
+        >
+          Start Interview
+        </button>
+      </div>
     </>
   );
 };
