@@ -1,8 +1,0 @@
-opencv-python
-mediapipe
-ffmpeg-python
-pyAudioAnalysis
-openai
-python-dotenv
-pydub
-eyed3
