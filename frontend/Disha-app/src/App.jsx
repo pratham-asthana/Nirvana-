@@ -9,12 +9,14 @@ import About from "./components/About/About";
 import Purpose from "./components/Purpose/Purpose";
 import Instructions from "./instructions/Instructions";
 import Interview from "./components/Interview";
+import Domain from "./domain/Domain";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/domain" element={<Domain />}></Route>
           <Route path="/interview" element={<Interview />}></Route>
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/signUp" element={<SignUp />} />
