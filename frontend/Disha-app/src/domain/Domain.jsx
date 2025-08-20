@@ -7,6 +7,7 @@ import { FaMobileAlt } from "react-icons/fa";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { CiSettings } from "react-icons/ci";
 import { FiTarget } from "react-icons/fi";
+import { PiCopyright } from "react-icons/pi";
 import { db } from "../config/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -71,6 +72,10 @@ const Domain = () => {
             </div>
           );
         })}
+      </div>
+      <div className="footer-main-div">
+        <PiCopyright className="copyright-icon" />
+        <p>2024 Career Portal. Find your dream job in technology.</p>
       </div>
     </div>
   );
