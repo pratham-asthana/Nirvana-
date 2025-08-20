@@ -112,3 +112,6 @@
   font-size: 15px;
   cursor: pointer;
 }
+.domain-cards-container-main-div {
+  display: grid;
+}

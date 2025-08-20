@@ -8,7 +8,7 @@ import { IoColorPaletteOutline } from "react-icons/io5";
 import { CiSettings } from "react-icons/ci";
 import { FiTarget } from "react-icons/fi";
 import { db } from "../config/firebase-config";
-import { collection, getDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 const iconMap = {
   IoCode: IoCode,
@@ -48,23 +48,29 @@ const Domain = () => {
           innovation.
         </p>
       </div>
-      <div className="domain-card-div">
-        <div className="domain-card-icon">
-          <IoCode size={"20px"} color="white" />
-        </div>
-        <h3 className="domain-name">Web Development</h3>
-        <p className="domain-description">
-          Build modern, responsive web applications using cutting-edge
-          technologies and frameworks.
-        </p>
-        <div className="domain-card-details">
-          <p className="domain-card-details-1">2-5 years</p>
-          <p className="domain-card-details-2">$700 - $120,000</p>
-        </div>
-        <div className="domain-card-button-arrow">
-          <button className="view-jd-button">View Job Description</button>
-          <FaArrowRightLong />
-        </div>
+      <div className="domain-cards-container-main-div">
+        {domains.map((item, index) => {
+          const IconComponent = iconMap[item.icon];
+          return (
+            <div className="domain-card-div" key={item.id}>
+              <div className="domain-card-icon">
+                {IconComponent && <IconComponent size={"20px"} color="white" />}
+              </div>
+              <h3 className="domain-name">{item.name}</h3>
+              <p className="domain-description">{item.desc}</p>
+              <div className="domain-card-details">
+                <p className="domain-card-details-1">{item.experience} years</p>
+                <p className="domain-card-details-2">
+                  ${item.payLower} - ${item.payUpper}
+                </p>
+              </div>
+              <div className="domain-card-button-arrow">
+                <button className="view-jd-button">View Job Description</button>
+                <FaArrowRightLong />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
