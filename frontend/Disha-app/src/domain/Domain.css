@@ -33,3 +33,67 @@
   width: 50%;
   text-align: center;
 }
+.domain-card-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 125px;
+  margin-top: 70px;
+  gap: 10px;
+  width: 30%;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+}
+.domain-card-icon {
+  width: 50px;
+  height: 50px;
+  padding: 15px;
+  border-radius: 40%;
+  background: linear-gradient(to right, rgb(61, 61, 182), rgb(208, 116, 208));
+}
+.domain-name {
+  font-size: 1.5rem;
+}
+.domain-description {
+  font-size: 1rem;
+  color: rgb(99, 96, 96);
+}
+.domain-card-details {
+  display: flex;
+  flex-direction: row;
+  gap: 240px;
+}
+.domain-card-details-1 {
+  background-color: rgb(181, 179, 179);
+  width: 80px;
+  height: 25px;
+  padding-bottom: 4px;
+  padding-left: 7px;
+  border-radius: 8px;
+  color: rgb(70, 69, 69);
+  font-size: 15px;
+}
+.domain-card-details-2 {
+  color: blue;
+  font-size: 14px;
+}
+.domain-card-button-arrow {
+  background-color: rgb(209, 209, 195);
+  width: 400px;
+  height: 40px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  border: 1px solid rgb(189, 186, 186);
+  cursor: pointer;
+}
+.view-jd-button {
+  border: none;
+  background-color: transparent;
+  font-size: 15px;
+  cursor: pointer;
+}
