@@ -46,6 +46,21 @@
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
 }
+.domain-card-div:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  transform: translateY(-5px);
+}
+.domain-card-div:hover .domain-card-button-arrow {
+  border: 1px solid blue;
+  color: blue;
+  background-color: rgb(212, 209, 209);
+}
+.domain-card-div:hover .view-jd-button {
+  color: blue;
+}
+.domain-card-div:hover .domain-name {
+  color: blue;
+}
 .domain-card-icon {
   width: 50px;
   height: 50px;

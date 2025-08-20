@@ -1,9 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Domain.css";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { IoCode } from "react-icons/io5";
+import { GoDatabase } from "react-icons/go";
+import { FaMobileAlt } from "react-icons/fa";
+import { IoColorPaletteOutline } from "react-icons/io5";
+import { CiSettings } from "react-icons/ci";
+import { FiTarget } from "react-icons/fi";
+import { db } from "../config/firebase-config";
+import { collection, getDoc } from "firebase/firestore";
+
+const iconMap = {
+  IoCode: IoCode,
+  GoDatabase: GoDatabase,
+  FaMobileAlt: FaMobileAlt,
+  IoColorPaletteOutline: IoColorPaletteOutline,
+  CiSettings: CiSettings,
+  FiTarget: FiTarget,
+};
 
 const Domain = () => {
+  const [domains, setDomains] = useState([]);
+
+  useEffect(() => {
+    const fetchDomains = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "domain"));
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setDomains(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchDomains();
+  }, []);
+
   return (
     <div className="domain-page-main-div">
       <div className="header-domain-div">
@@ -29,7 +63,7 @@ const Domain = () => {
         </div>
         <div className="domain-card-button-arrow">
           <button className="view-jd-button">View Job Description</button>
-          <FaArrowRightLong className="arrow-icon" />
+          <FaArrowRightLong />
         </div>
       </div>
     </div>
