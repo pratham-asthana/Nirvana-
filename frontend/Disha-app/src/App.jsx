@@ -9,6 +9,7 @@ import About from "./components/About/About";
 import Purpose from "./components/Purpose/Purpose";
 import Instructions from "./instructions/Instructions";
 import Interview from "./components/Interview";
+import Landing from "./components/Landing";
 import Domain from "./domain/Domain";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/landing" element={<Landing />}></Route>
           <Route path="/domain" element={<Domain />}></Route>
           <Route path="/interview" element={<Interview />}></Route>
           <Route path="/signIn" element={<SignIn />} />
