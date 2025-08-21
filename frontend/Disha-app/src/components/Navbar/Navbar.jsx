@@ -16,10 +16,10 @@ const Navbar = () => {
             <a href="#about">About</a>
           </li>
           <li>
-            <a href="#mission">Our Mission</a>
+            <a href="purpose">Our Purpose</a>
           </li>
           <li>
-            <a href="#vision">Our Vision</a>
+            <a href="">creators</a>
           </li>
         </ul>
         <div className="nav-buttons">
