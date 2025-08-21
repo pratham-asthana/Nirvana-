@@ -40,6 +40,8 @@ def Tokens(text):
     stop_words = set(stopwords.words('english'))
     word_tokens = word_tokenize(text)
     stemmed_words = [ps.stem(w) for w in word_tokens if w.lower() not in stop_words]
+    stemmed_words = ",".join(stemmed_words)
+    stemmed_words = stemmed_words.lower()
     return stemmed_words
 
 def Keyword_Extraction_Resume(text):
@@ -61,6 +63,23 @@ def Keyword_Extraction_JD(text):
     )
     skills = [kw for doc in keywords for kw, _ in doc]
     return skills
+
+# pip install rake-nltk
+
+def extract_keywords_rake_resume(text, top_k=20):
+    from rake_nltk import Rake
+    r = Rake(min_length=1, max_length=3)  # n-grams 1..3
+    r.extract_keywords_from_text(text)
+    ranked = r.get_ranked_phrases()  # best → worst
+    return ranked[:top_k]
+
+def extract_keywords_rake_JD(text, top_k=15):
+    from rake_nltk import Rake
+    r = Rake(min_length=1, max_length=3)  # n-grams 1..3
+    r.extract_keywords_from_text(text)
+    ranked = r.get_ranked_phrases()  # best → worst
+    return ranked[:top_k]
+
 
 def Matching_Missing(Resume_Skills, JD_Skills):
     # Find overlaps and missing skills

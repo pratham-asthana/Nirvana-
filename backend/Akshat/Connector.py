@@ -3,14 +3,14 @@
 
 # API called for Resume Analysis with the pdf_path and JD
 def API_NLP(Extracted_text, JD, difficulty):
-    from Resume_Analysis import Tokens, clean_text, Keyword_Extraction_Resume, Keyword_Extraction_JD, Matching_Missing, ATS
+    from Resume_Analysis import Tokens, clean_text,extract_keywords_rake_resume, extract_keywords_rake_JD, Matching_Missing, ATS
     #Extracted_text = text_from_pdf(pdf_path)
     Extracted_text = clean_text(Extracted_text)
     JD = clean_text(JD)
     Extracted_text = Tokens(Extracted_text)
     JD = Tokens(JD)
-    Resume_Skills = Keyword_Extraction_Resume(Extracted_text)
-    JD_Skills = Keyword_Extraction_JD(JD)
+    Resume_Skills = extract_keywords_rake_resume(Extracted_text)
+    JD_Skills = extract_keywords_rake_JD(JD)
     print(Resume_Skills)
     print(JD_Skills)
     Skills = Matching_Missing(Resume_Skills, JD_Skills)
@@ -29,7 +29,7 @@ def API_NLP(Extracted_text, JD, difficulty):
         "JD_Skills" : JD_Skills,
         "Skills" : Skills,
         "ATS_Score" : ATS_Score,
-        "Questions" : Questions
+        "Questions" : "Questions"
     }
     return Analysis
 
@@ -39,3 +39,6 @@ def API_QNA(User_Answer, Question):
     # User_Answer = Speech_To_Text(User_Answer_Audio)
     Measure = Answer_Analysis(User_Answer, Question)
     return Measure
+
+def API_Resume(Resume, JD):
+    from Resume_Analysis_2 import 
