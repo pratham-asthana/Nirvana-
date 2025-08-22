@@ -1,16 +1,18 @@
 import React from 'react'
-import Navbar from "./components/Navbar/Navbar";
-import Hero from "./components/Hero/Hero";
-import About from "./components/About/About";
-import Purpose from "./components/Purpose/Purpose";
+import Navbar from './Navbar/Navbar';
+import Hero from './Hero/Hero';
+import About from './About/About'
+import Purpose from './Purpose/Purpose'
+import Footer from './Footer/Footer';
 
 const Landing = () => {
   return (
     <div>
         <Navbar />
-        <About />
         <Hero />
+        <About />
         <Purpose />
+        <Footer />
     </div>
   )
 }
