@@ -23,10 +23,10 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="nav-buttons">
-          <Link to="/login/signUp" className="btn btn-outline">
+          <Link to="/signUp" className="btn btn-outline">
             Sign Up
           </Link>
-          <Link to="/login/signIn" className="btn btn-primary">
+          <Link to="signIn" className="btn btn-primary">
             Sign In
           </Link>
         </div>
