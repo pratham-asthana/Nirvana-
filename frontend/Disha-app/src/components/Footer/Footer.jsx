@@ -28,13 +28,14 @@ const Footer = () => {
         <div className="footer-brand">
           <h2 className="footer-logo">AI Interviewer</h2>
           <p className="footer-tagline">
-            Empowering your future with AI-powered mock interviews.
+            Empowering your future with AI-powered interviews.
           </p>
         </div>
         <ul className="footer-links">
           <li><a href="/">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#purpose">Purpose</a></li>
+          <li><a href="#creators">Creators</a></li>
         </ul>
         <div className="footer-socials">
           <a
