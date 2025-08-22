@@ -6,6 +6,10 @@ User_Answer = "My approach to a customer churn problem would begin with data exp
 Question_2 = "You've built a model that has great performance on your validation set, but when it's deployed to production, its performance starts to degrade over time. What could be causing this, and what steps would you take to diagnose and solve the problem?"
 User_Answer_Audio = r"C:\Users\akshat\Desktop\python projects\Projects\Nirvana-\backend\Akshat\STT_Sample.wav"
 Vosk_Path = r"C:\Users\akshat\Desktop\python projects\Projects\Nirvana-\backend\Akshat\vosk-model-small-en-us-0.15"
+
+
+Resume_Text = "Python, C, Pandas, NumPy, scikit-learn, TensorFlow, Streamlit, Matplotlib, NLTK, pyttsx3, Vosk, Sounddevice, Machine Learning, Deep Learning, NLP, Computer Vision, Data Analysis, Data Pre-processing, Predictive Systems, LLMs, LangChain, HuggingFace, RAG, Gemini API, Conversational AI, Resume Assistant, Chatbot, API Integration, STT, TTS, Text Vectorization, LSTM, Sentiment Analysis, GUI, Prompt Engineering, Open-source LLMs, ATS-friendly, End-to-End Pipeline, Hackathon, Problem-solving, Passion for AI/ML, Intelligent Systems, GenAI Solutions, Team Player, Growth Mindset, Quick Learner, Real-world Projects, Project Ownership, Innovation, Competitive Achievement, Leadership, Content Head, Communication, Adaptability, Creativity"
+JD_Text = "AI/ML Intern, Machine Learning, AI-driven Solutions, Data Preprocessing, Model Training, Model Evaluation, Model Deployment, Real-world Applications, Collecting Datasets, Cleaning Datasets, Preprocessing Datasets, Feature Engineering, Optimize Models, Performance Optimization, APIs, Cloud Platforms, AWS, GCP, Azure, PyTorch, TensorFlow, Scikit-learn, Keras, Python, Pandas, NumPy, Matplotlib, AI Algorithms, State-of-the-art, Documentation, Code Repositories, Git, Brainstorming, Prototyping, Computer Science, Data Science, Regression, Classification, Clustering, Deep Learning, Model Evaluation Metrics, Problem-solving, Eagerness to Learn, NLP, Computer Vision, Reinforcement Learning, SQL, NoSQL, Databases, AWS Sagemaker, GCP AI Platform, Azure ML, GitHub, Version Control, Research, Open-source Projects"
 # text_limit = 300
 # JD_limit = 200
 # from Connector import API_NLP
@@ -19,3 +23,28 @@ Vosk_Path = r"C:\Users\akshat\Desktop\python projects\Projects\Nirvana-\backend\
 
 # Measure = API_QNA(User_Answer, Question_2)
 # print(Measure)
+
+# from Connector import API_Resume
+# ATS = API_Resume(text, JD)
+# print(ATS)
+
+# Resume_Text = list(Resume_Text)
+# JD_Text = list(JD_Text)
+
+# from Resume_Analysis_2 import extraction, Matching_Skills
+# Resume = extraction(Resume_Text)
+# JD = extraction(JD_Text)
+# count = Matching_Skills(Resume, JD)
+# print(count)
+# print("Resume keywords :\n", Resume)
+# print("\nJD keywords: \n", JD)
+
+# from Resume_Analysis_2 import keybert
+# keywords = keybert(Resume_Text)
+# print("Resume keywords:\n", keywords)
+# keywords = keybert(JD_Text)
+# print("JD keywords:\n", keywords)
+
+from Connector import API_Resume
+ATS = API_Resume(text, JD)
+print("ATS_Avg:", ATS)
