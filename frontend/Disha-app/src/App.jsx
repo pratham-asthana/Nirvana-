@@ -7,6 +7,7 @@ import Instructions from "./instructions/Instructions";
 import Interview from "./components/Interview";
 import Landing from "./components/Landing";
 import Domain from "./domain/Domain";
+import JobDesc from "./jobDesc/JobDesc";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/instructions" element={<Instructions />} />
+          <Route path="/job/:id" element={<JobDesc />}></Route>
         </Routes>
       </Router>
     </div>

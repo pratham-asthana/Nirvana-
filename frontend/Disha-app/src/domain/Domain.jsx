@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Domain.css";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { IoCode } from "react-icons/io5";
@@ -21,6 +22,7 @@ const iconMap = {
 };
 
 const Domain = () => {
+  const navigate = useNavigate();
   const [domains, setDomains] = useState([]);
 
   useEffect(() => {
@@ -65,7 +67,10 @@ const Domain = () => {
                   ${item.payLower} - ${item.payUpper}
                 </p>
               </div>
-              <div className="domain-card-button-arrow">
+              <div
+                className="domain-card-button-arrow"
+                onClick={() => navigate(`/job/${item.id}`)}
+              >
                 <button className="view-jd-button">View Job Description</button>
                 <FaArrowRightLong />
               </div>
