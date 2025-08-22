@@ -40,14 +40,14 @@ def API_QNA(User_Answer, Question):
     Measure = Answer_Analysis(User_Answer, Question)
     return Measure
 
-def API_Resume(Resume, JD):
+def API_Resume(Resume, JD, kw_model):
     from Resume_Analysis_2 import clean_text, Tokens, extraction, Matching_Skills, Matching, keybert, ATS_Calculation_2, ATS_Calculation, ATS_Calculation_3, bow_match_score, ATS_Avg, Ats_Enhanced
     Resume = clean_text(Resume)
     JD = clean_text(JD)
     Resume = Tokens(Resume)
     JD = Tokens(JD)
-    Resume_kw = keybert(Resume)
-    JD_kw = keybert(JD)
+    Resume_kw = keybert(Resume, kw_model)
+    JD_kw = keybert(JD, kw_model)
     Set = Matching(Resume_kw, JD_kw)
     # ATS = ATS_Calculation_2(Count, JD, Resume)
     # ATS = ATS_Calculation(Count, JD)

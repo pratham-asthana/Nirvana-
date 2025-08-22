@@ -67,9 +67,7 @@ def extraction(text):
     keywords = vectorizer.get_feature_names_out()
     return(list(keywords))
 
-def keybert(text):
-    from keybert import KeyBERT
-    kw_model = KeyBERT()
+def keybert(text, kw_model):
     keywords = kw_model.extract_keywords(text, top_n=15)
     return keywords
 
