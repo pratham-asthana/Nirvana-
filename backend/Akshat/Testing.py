@@ -4,8 +4,6 @@ Difficulty = "hard"
 Question = "Imagine you're tasked with building a machine learning model to predict customer churn for a subscription-based service. What are the key steps you would take, from initial data exploration to deploying the final model? Walk me through your process, and be sure to highlight the potential challenges you might face at each stage and how you would address them."
 User_Answer = "My approach to a customer churn problem would begin with data exploration to understand the features and handle issues like imbalanced data through techniques like SMOTE. I would then engineer new features, such as customer tenure and usage frequency, using domain knowledge to create strong predictors. For model selection, I'd likely start with XGBoost or LightGBM and focus on metrics like precision and recall, as these are more informative than simple accuracy in churn prediction. After training with cross-validation, I would evaluate the model's performance and use tools like SHAP to interpret its predictions, which provides actionable insights for the business. The final step would be deploying the model and setting up monitoring to track for potential model drift and ensure long-term effectiveness."
 Question_2 = "You've built a model that has great performance on your validation set, but when it's deployed to production, its performance starts to degrade over time. What could be causing this, and what steps would you take to diagnose and solve the problem?"
-User_Answer_Audio = r"C:\Users\akshat\Desktop\python projects\Projects\Nirvana-\backend\Akshat\STT_Sample.wav"
-Vosk_Path = r"C:\Users\akshat\Desktop\python projects\Projects\Nirvana-\backend\Akshat\vosk-model-small-en-us-0.15"
 
 Disha_text = "DISHA GUPTA (+91) 9871847746 ⋄ Delhi, India guptadisha.1009@gmail.com ⋄ Leetcode ⋄ LinkedIn ⋄ GitHub SUMMARY Detail-oriented and passionate Computer Science student seeking a Software Developer role. Eager to contribute to user-centric, high-performance web applications in a collaborative and agile development environment. EDUCATION Bachelor of Technology, JIMS Engineering Management Technical Campus Expected 2026 Computer Science – 8.4 CBSE Senior Secondary (XII), Bal Mandir Sr. Sec. School – 8.3 2022 SKILLS Technical Skills React.js, JavaScript (ES6+), HTML5, CSS3, React Router, Redux Toolkit, React Hooks, Git, GitHub, Firebase, Node.js (basics), Vite, JSON, Figma, Visual Studio Code, Responsive WebDesign, Mobile-FirstDesign, Cross-BrowserCompatibility, DOMManipulation, Debug- ging, Version Control, Agile Development, Object-Oriented Programming (OOP), UI/UX Principles, DSA (LeetCode – 120+ problems) Soft Skills Communication, Team Collaboration, Problem Solving, Adaptability, Time Management, Attention to Detail, Critical Thinking, Creativity EXPERIENCE Frontend Developer Intern Nov 2024 - Jan 2025 Appinnovix Lucknow, Uttar Pradesh • Developed responsive, cross-browser interfaces using HTML5, CSS3, and JavaScript (ES6+), improving perfor- mance and accessibility across devices. • Built modular, scalable UI components with React.js, React Hooks, and Redux Toolkit, enhancing application consistency and user experience. • Implemented React Router for dynamic SPA navigation and collaborated in an Agile team using Git/GitHub to ship iterative, production-ready features. PROJECTS Blogging Website. Built a responsive and scalable blogging platform using React.js, Firebase Authentication, and Firestore Database, enabling users to securely create, edit, and manage blog posts. Integrated React Router for seamless navigation, and implemented modular components and responsive UI/UX to enhance usability and performance across devices. (GitHub) E-commerce webpage. Developed responsive, accessible web interfaces and reusable components using React.js, JavaScript (ES6+), HTML5, CSS3, React Router, and Redux Toolkit in an Agile environment, improving UI perfor- mance and user experience across devices. (GitHub) Landing Page. Designed and developed a responsive, conversion-focused landing page for a fictional makeup brand using HTML5, CSS3, and AOS animations, highlighting brand identity, UI/UX design principles, and front-end performance optimization.(GitHub) CERTIFICATIONS • Complete JavaScript Course: Jonas Schmedtmann • Git Tutorial Certificate: IBM SkillsBuild"
 JD_Disha = "The Web Development Intern will assist in the design, development, and maintenance of full-stack web applications, gaining hands-on experience by contributing to both the user-facing frontend and the server-side backend. Responsibilities include writing clean, efficient, and well-documented code, participating in code reviews, and collaborating with the development team to troubleshoot and debug issues. The ideal candidate will have a strong foundation in core web technologies like HTML, CSS, and JavaScript for frontend development and a basic understanding of backend concepts, including server-side programming languages such as Node.js, Python, or PHP, and database management systems like MySQL or MongoDB. Familiarity with frontend frameworks like React, Angular, or Vue.js, as well as backend frameworks like Express.js or Django, is highly valued. Key tools for this role include Git for version control, a modern code editor like Visual Studio Code, and browser developer tools for debugging. Strong problem-solving skills, attention to detail, and a passion for learning are essential for success in this role."
@@ -17,44 +15,12 @@ Lakshay_JD = "Lakshay Gupta (cid:131) 9599235772 # lakshaygupta2002.2.19@gmail.c
 
 Resume_Text = "Python, C, Pandas, NumPy, scikit-learn, TensorFlow, Streamlit, Matplotlib, NLTK, pyttsx3, Vosk, Sounddevice, Machine Learning, Deep Learning, NLP, Computer Vision, Data Analysis, Data Pre-processing, Predictive Systems, LLMs, LangChain, HuggingFace, RAG, Gemini API, Conversational AI, Resume Assistant, Chatbot, API Integration, STT, TTS, Text Vectorization, LSTM, Sentiment Analysis, GUI, Prompt Engineering, Open-source LLMs, ATS-friendly, End-to-End Pipeline, Hackathon, Problem-solving, Passion for AI/ML, Intelligent Systems, GenAI Solutions, Team Player, Growth Mindset, Quick Learner, Real-world Projects, Project Ownership, Innovation, Competitive Achievement, Leadership, Content Head, Communication, Adaptability, Creativity"
 JD_Text = "AI/ML Intern, Machine Learning, AI-driven Solutions, Data Preprocessing, Model Training, Model Evaluation, Model Deployment, Real-world Applications, Collecting Datasets, Cleaning Datasets, Preprocessing Datasets, Feature Engineering, Optimize Models, Performance Optimization, APIs, Cloud Platforms, AWS, GCP, Azure, PyTorch, TensorFlow, Scikit-learn, Keras, Python, Pandas, NumPy, Matplotlib, AI Algorithms, State-of-the-art, Documentation, Code Repositories, Git, Brainstorming, Prototyping, Computer Science, Data Science, Regression, Classification, Clustering, Deep Learning, Model Evaluation Metrics, Problem-solving, Eagerness to Learn, NLP, Computer Vision, Reinforcement Learning, SQL, NoSQL, Databases, AWS Sagemaker, GCP AI Platform, Azure ML, GitHub, Version Control, Research, Open-source Projects"
+
+#Keybert import
 from keybert import KeyBERT
 kw_model = KeyBERT()
 
-# text_limit = 300
-# JD_limit = 200
-# from Connector import API_NLP
-# Data = API_NLP(text, JD, Difficulty)
-
-# from Connector import API_QNA
-
-# from Connector import API_NLP
-# analysis = API_NLP(text, JD, Difficulty)
-# print(analysis)
-
-# Measure = API_QNA(User_Answer, Question_2)
-# print(Measure)
-
-# from Connector import API_Resume
-# ATS = API_Resume(text, JD)
-# print(ATS)
-
-# Resume_Text = list(Resume_Text)
-# JD_Text = list(JD_Text)
-
-# from Resume_Analysis_2 import extraction, Matching_Skills
-# Resume = extraction(Resume_Text)
-# JD = extraction(JD_Text)
-# count = Matching_Skills(Resume, JD)
-# print(count)
-# print("Resume keywords :\n", Resume)
-# print("\nJD keywords: \n", JD)
-
-# from Resume_Analysis_2 import keybert
-# keywords = keybert(Resume_Text)
-# print("Resume keywords:\n", keywords)
-# keywords = keybert(JD_Text)
-# print("JD keywords:\n", keywords)
-
+#Calculating ATS
 print("Akshat's Resume:")
 from Connector import API_Resume
 ATS = API_Resume(text, JD, kw_model)
@@ -74,3 +40,10 @@ print("\nLakshay's Resume:")
 from Connector import API_Resume
 ATS = API_Resume(Lakshay_text, Lakshay_JD, kw_model)
 print("ATS_Avg:", ATS)
+
+#Checking Answer
+from Connector import API_QNA
+Measure = API_QNA(User_Answer, Question)
+print("Measure for first question:", Measure)
+Measure = API_QNA(User_Answer, Question_2)
+print("Measure for second question:", Measure)

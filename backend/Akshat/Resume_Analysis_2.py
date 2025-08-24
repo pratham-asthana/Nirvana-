@@ -35,11 +35,11 @@ def clean_text(text):
 
 def Tokens(text):
     import nltk
-    from nltk.corpus import stopwords
+    # from nltk.corpus import stopwords
     from nltk.tokenize import word_tokenize
-    from nltk.stem import PorterStemmer
-    ps = PorterStemmer()
-    stop_words = set(stopwords.words('english'))
+    # from nltk.stem import PorterStemmer
+    # ps = PorterStemmer()
+    # stop_words = set(stopwords.words('english'))
     word_tokens = word_tokenize(text)
     # stemmed_words = [ps.stem(w) for w in word_tokens if w.lower() not in stop_words]
     # stemmed_words = [ps.stem(w) for w in word_tokens]
@@ -79,28 +79,11 @@ def Matching(resume_keywords, jd_keywords):
     Set = (resume_set, jd_set)
     return Set
 
-def ATS_Calculation(Count, JD_Skills):
-    JD_len = len(JD_Skills)
-    ATS = Count/JD_len
-    ATS = ATS*100
-    return ATS
-
-def ATS_Calculation_2(Count, JD_Skills, Resume_Skills):
-    JD_len = len(JD_Skills)
-    recall = Count / JD_len  # How much of JD covered
-    precision = Count / len(Resume_Skills) # How relevant resume is
-
-    # F1-like scoring (balanced relevance + coverage)
-    ATS = (0.6 * recall + 0.4 * precision) * 100
-    return round(ATS, 2)
-
-def ATS_Calculation_3(Set):
+def ATS_Calculation(Set):
     resume_set, jd_set = Set
     common = resume_set & jd_set
 
     if not resume_set or not jd_set:
-        print("Match Score: 0%")
-        print("Matched Keywords:", common)
         return 0
 
     Precision = len(common) / len(resume_set)
@@ -111,8 +94,8 @@ def ATS_Calculation_3(Set):
         match_score = (2 * Precision * Recall) / (Precision + Recall)
 
     match_score *= 100
-    print("Match Score:", round(match_score, 2), "%")
-    print("Matched Keywords:", common)
+    # print("Match Score:", round(match_score, 2), "%")
+    # print("Matched Keywords:", common)
     return match_score
 
 def bow_match_score(resume_text, jd_text):
@@ -126,7 +109,7 @@ def bow_match_score(resume_text, jd_text):
     similarity = cosine_similarity(vectors[0], vectors[1])[0][0]
 
     similarity = round(similarity * 100, 2)
-    print("ATS_BOW:", similarity)
+    # print("ATS_BOW:", similarity)
     return similarity
 
 def ATS_Avg(Ats1, Ats2, Ats3):
@@ -175,11 +158,11 @@ def semantic_similarity(resume_text, jd_text):
 #  Combine everything
 def Ats_Enhanced(resume_text, jd_text):
     # Expanded terms
-    resume_terms = expand_keywords(resume_text) + list(get_phrases(resume_text))
-    jd_terms = expand_keywords(jd_text) + list(get_phrases(jd_text))
+    # resume_terms = expand_keywords(resume_text) + list(get_phrases(resume_text))
+    # jd_terms = expand_keywords(jd_text) + list(get_phrases(jd_text))
 
     # Weighted lexical score
-    lexical_score = weighted_score(resume_terms, jd_terms)
+    # lexical_score = weighted_score(resume_terms, jd_terms)
 
     # Semantic score
     semantic_score = semantic_similarity(resume_text, jd_text)
@@ -188,5 +171,5 @@ def Ats_Enhanced(resume_text, jd_text):
     # final_score = (0.6 * lexical_score) + (0.4 * semantic_score)
     # print("ATS_Enhanced:", final_score)
     # return final_score
-    print("ATS_Enhanced:", semantic_score)
+    # print("ATS_Enhanced:", semantic_score)
     return semantic_score

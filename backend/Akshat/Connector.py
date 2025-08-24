@@ -1,7 +1,4 @@
-# File which is the intermediate for the Main file and the files in this particular folder
-# API will be called to this python file. And then it will be connected in that manner.
-
-# API called for Resume Analysis with the pdf_path and JD
+# Connecting with this file
 def API_NLP(Extracted_text, JD, difficulty):
     from Resume_Analysis import Tokens, clean_text,extract_keywords_rake_resume, extract_keywords_rake_JD, Matching_Missing, ATS
     #Extracted_text = text_from_pdf(pdf_path)
@@ -41,7 +38,7 @@ def API_QNA(User_Answer, Question):
     return Measure
 
 def API_Resume(Resume, JD, kw_model):
-    from Resume_Analysis_2 import clean_text, Tokens, extraction, Matching_Skills, Matching, keybert, ATS_Calculation_2, ATS_Calculation, ATS_Calculation_3, bow_match_score, ATS_Avg, Ats_Enhanced
+    from Resume_Analysis_2 import clean_text, Tokens, Matching, keybert, ATS_Calculation, bow_match_score, ATS_Avg, Ats_Enhanced
     Resume = clean_text(Resume)
     JD = clean_text(JD)
     Resume = Tokens(Resume)
@@ -49,9 +46,7 @@ def API_Resume(Resume, JD, kw_model):
     Resume_kw = keybert(Resume, kw_model)
     JD_kw = keybert(JD, kw_model)
     Set = Matching(Resume_kw, JD_kw)
-    # ATS = ATS_Calculation_2(Count, JD, Resume)
-    # ATS = ATS_Calculation(Count, JD)
-    ATS_1 = ATS_Calculation_3(Set)
+    ATS_1 = ATS_Calculation(Set)
     ATS_2 = bow_match_score(Resume, JD)
     ATS_3 = Ats_Enhanced(Resume, JD)
     ATS = ATS_Avg(ATS_1, ATS_2, ATS_3)
