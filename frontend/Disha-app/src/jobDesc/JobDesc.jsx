@@ -19,18 +19,6 @@ const JobDesc = () => {
       alert("Please select a resume to upload!");
       return;
     }
-    const formData = new FormData();
-    formData.append("resume", resume);
-
-    try {
-      await axios.post("http://localhost:5000/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      alert("Resume uploaded successfully!");
-    } catch (error) {
-      console.error(error);
-      alert("Error uploading resume");
-    }
   };
 
   useEffect(() => {
@@ -80,14 +68,15 @@ const JobDesc = () => {
           </li>
         ))}
       </ul>
-      <div style={{ marginTop: "40px", textAlign: "center" }}>
-        <h3>Upload Your Resume</h3>
+      <div className="resume-main-div">
+        <h3 style={{ fontSize: "20px" }}>Upload Your Resume</h3>
         <input
           type="file"
           accept=".pdf,.doc,.docx"
           onChange={handleFileChange}
+          className="input-container"
         />
-        <button onClick={handleUpload} style={{ marginLeft: "10px" }}>
+        <button onClick={handleUpload} className="upload-resume-button">
           Upload Resume
         </button>
       </div>
