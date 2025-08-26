@@ -1,0 +1,21 @@
+.job-desc-heading {
+  background-image: url("/job_back_2.jfif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-clip: text;
+  color: transparent;
+  animation: animate 10s linear infinite;
+  text-align: center;
+  font-size: 80px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-top: 22px;
+  margin-bottom: 40px;
+  border-left: 30px solid rgb(79, 137, 182);
+  border-right: 30px solid rgb(79, 137, 182);
+}
+@keyframes animate {
+  to {
+    background-position-x: 200px;
+  }
+}

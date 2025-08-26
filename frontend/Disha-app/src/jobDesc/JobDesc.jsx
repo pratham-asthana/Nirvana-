@@ -31,7 +31,7 @@ const JobDesc = () => {
 
   return (
     <div>
-      <h1>Job Description</h1>
+      <h1 className="job-desc-heading">Job Description</h1>
       <h2>Responsibilities</h2>
       <ul>
         {job.responsibilities?.map((res, i) => (
