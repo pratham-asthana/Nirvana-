@@ -44,7 +44,7 @@ const JobDesc = () => {
           <li key={i}>{skill}</li>
         ))}
       </ul>
-      <h1>What we offer</h1>
+      <h2>What we offer</h2>
       <ul>
         {job.offer.map((off, i) => (
           <li key={i}>{off}</li>

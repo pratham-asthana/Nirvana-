@@ -1,5 +1,5 @@
 .domain-page-main-div {
-  background-color: rgb(241, 238, 235);
+  background: linear-gradient(to right, rgb(71, 71, 181), rgb(190, 80, 190));
   min-height: 100vh;
   padding: 0;
   margin: 0;
