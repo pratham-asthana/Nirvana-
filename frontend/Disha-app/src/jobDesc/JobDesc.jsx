@@ -6,8 +6,32 @@ import { db } from "../config/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 
 const JobDesc = () => {
+  const [resume, setResume] = useState(null);
   const { id } = useParams();
   const [job, setJob] = useState(null);
+
+  const handleFileChange = (e) => {
+    setResume(e.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!resume) {
+      alert("Please select a resume to upload!");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("resume", resume);
+
+    try {
+      await axios.post("http://localhost:5000/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      alert("Resume uploaded successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Error uploading resume");
+    }
+  };
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -56,6 +80,17 @@ const JobDesc = () => {
           </li>
         ))}
       </ul>
+      <div style={{ marginTop: "40px", textAlign: "center" }}>
+        <h3>Upload Your Resume</h3>
+        <input
+          type="file"
+          accept=".pdf,.doc,.docx"
+          onChange={handleFileChange}
+        />
+        <button onClick={handleUpload} style={{ marginLeft: "10px" }}>
+          Upload Resume
+        </button>
+      </div>
     </div>
   );
 };
