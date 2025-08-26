@@ -32,22 +32,28 @@ const JobDesc = () => {
   return (
     <div>
       <h1 className="job-desc-heading">Job Description</h1>
-      <h2>Responsibilities</h2>
-      <ul>
+      <h2 className="responsibilities-heading">Responsibilities</h2>
+      <ul style={{ marginBottom: "40px" }}>
         {job.responsibilities?.map((res, i) => (
-          <li key={i}>{res}</li>
+          <li className="res-list-items" key={i}>
+            {res}
+          </li>
         ))}
       </ul>
-      <h2>Required Skills & Qualifications</h2>
-      <ul>
+      <h2 className="req-heading">Required Skills & Qualifications</h2>
+      <ul style={{ marginBottom: "40px" }}>
         {job.skills.map((skill, i) => (
-          <li key={i}>{skill}</li>
+          <li className="req-list-items" key={i}>
+            {skill}
+          </li>
         ))}
       </ul>
-      <h2>What we offer</h2>
+      <h2 className="what-heading">What we offer</h2>
       <ul>
         {job.offer.map((off, i) => (
-          <li key={i}>{off}</li>
+          <li className="what-list-items" key={i}>
+            {off}
+          </li>
         ))}
       </ul>
     </div>
