@@ -1,11 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import {useNavigate} from "react-router-dom"
 import { useParams } from "react-router-dom";
 import "./JobDesc.css";
 import { db } from "../config/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 
 const JobDesc = () => {
+  const navigate = useNavigate();
   const [resume, setResume] = useState(null);
   const { id } = useParams();
   const [job, setJob] = useState(null);
@@ -19,6 +21,7 @@ const JobDesc = () => {
       alert("Please select a resume to upload!");
       return;
     }
+    navigate("/instructions");
   };
 
   useEffect(() => {
@@ -76,7 +79,7 @@ const JobDesc = () => {
           onChange={handleFileChange}
           className="input-container"
         />
-        <button onClick={handleUpload} className="upload-resume-button">
+        <button onClick={handleUpload} className="upload-resume-button" >
           Upload Resume
         </button>
       </div>

@@ -13,7 +13,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard");
+      navigate("/domain");
     } catch (error) {
       alert(error.message);
     }
