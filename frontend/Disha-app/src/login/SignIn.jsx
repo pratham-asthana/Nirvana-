@@ -22,7 +22,7 @@ const Login = () => {
     <div className="auth-container">
       <div className="auth-box">
         <div className="auth-logo">
-          <h2>InterviewPro</h2>
+          <h2>AI Interviewer</h2>
           <p>Advanced interview analytics platform</p>
         </div>
 
