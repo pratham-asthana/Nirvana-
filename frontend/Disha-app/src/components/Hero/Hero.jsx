@@ -16,7 +16,7 @@ const Hero = () => (
         provide deeper insights, reduce bias, and help you find the perfect
         candidates faster than ever.
       </p>
-      <a href="/signUp" className="hero-btn">
+      <a href="/signIn" className="hero-btn">
         Schedule Your Interview
       </a>
       <button className="hero-btn-alt">Learn More</button>
