@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/instruction");
+      navigate("/domain");
     } catch (error) {
       alert(error.message);
     }
