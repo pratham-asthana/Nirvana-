@@ -2,7 +2,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 20px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .interview-header {
@@ -70,9 +70,15 @@
 }
 
 @keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .video-controls {
@@ -133,7 +139,7 @@
 }
 
 .start-btn {
-  background: #4CAF50;
+  background: #4caf50;
   color: white;
 }
 
@@ -153,22 +159,23 @@
 }
 
 .next-btn {
-  background: #2196F3;
+  background: #2196f3;
   color: white;
+  margin-right: 10px;
 }
 
 .next-btn:hover:not(:disabled) {
-  background: #1976D2;
+  background: #1976d2;
   transform: translateY(-2px);
 }
 
 .submit-btn {
-  background: #FF9800;
+  background: #ff9800;
   color: white;
 }
 
 .submit-btn:hover:not(:disabled) {
-  background: #F57C00;
+  background: #f57c00;
   transform: translateY(-2px);
 }
 
@@ -184,16 +191,16 @@
     flex-direction: column;
     height: auto;
   }
-  
+
   .video-section,
   .question-section {
     min-height: 300px;
   }
-  
+
   .interview-header h1 {
     font-size: 2rem;
   }
-  
+
   .question-text {
     font-size: 1.1rem;
   }
