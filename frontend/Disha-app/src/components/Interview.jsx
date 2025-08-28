@@ -1,32 +1,38 @@
-import React, { useState, useRef, useEffect } from 'react';
-import './Interview.css';
+import React, { useState, useRef, useEffect } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../config/firebase-config";
+import "./Interview.css";
 
 const Interview = () => {
   const [isRecording, setIsRecording] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(1);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [questions, setQuestions] = useState([]);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
-  
+
   const videoRef = useRef(null);
   const streamRef = useRef(null);
 
-  const questions = [
-    "Question 1: Tell me about yourself.",
-    "Question 2: What are your strengths and weaknesses?",
-    "Question 3: Why do you want this position?",
-    "Question 4: Where do you see yourself in 5 years?",
-    "Question 5: What is your greatest achievement?"
-  ];
-
   useEffect(() => {
-    // Initialize webcam when component mounts
+    const fetchQuestions = async () => {
+      const querySnapshot = await getDocs(collection(db, "questions"));
+      const questionsList = querySnapshot.docs.map((doc) => doc.data().text);
+      setQuestions(questionsList);
+
+      // Pick first random question
+      if (questionsList.length > 0) {
+        setCurrentQuestion(
+          questionsList[Math.floor(Math.random() * questionsList.length)]
+        );
+      }
+    };
+    fetchQuestions();
     initializeCamera();
-    
+
     return () => {
-      // Clean up camera stream when component unmounts
       if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
   }, []);
@@ -35,117 +41,94 @@ const Interview = () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: true,
-        audio: true
+        audio: true,
       });
       streamRef.current = stream;
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
     } catch (error) {
-      console.error('Error accessing camera:', error);
-      alert('Unable to access camera. Please check permissions.');
+      console.error("Error accessing camera:", error);
+      alert("Unable to access camera. Please check permissions.");
     }
   };
 
   const startRecording = () => {
     if (!streamRef.current) {
-      alert('Camera not initialized');
+      alert("Camera not initialized");
       return;
     }
 
     const recorder = new MediaRecorder(streamRef.current, {
-      mimeType: 'video/webm'
+      mimeType: "video/webm",
     });
 
     const chunks = [];
-    
+
     recorder.ondataavailable = (event) => {
-      console.log('Data available:', event.data.size);
       if (event.data.size > 0) {
         chunks.push(event.data);
       }
     };
 
     recorder.onstop = () => {
-      console.log('Recording stopped, chunks:', chunks.length);
       setRecordedChunks(chunks);
     };
 
     recorder.start();
     setMediaRecorder(recorder);
     setIsRecording(true);
-    setRecordedChunks([]); // Clear previous recordings
-    console.log('Recording started');
+    setRecordedChunks([]); // clear previous
   };
 
   const stopRecording = () => {
-    console.log('Stop recording called');
-    if (mediaRecorder && mediaRecorder.state === 'recording') {
-      console.log('Stopping recorder');
+    if (mediaRecorder && mediaRecorder.state === "recording") {
       mediaRecorder.stop();
       setIsRecording(false);
     }
   };
 
   const nextQuestion = () => {
-    if (currentQuestion < questions.length) {
-      setCurrentQuestion(currentQuestion + 1);
+    if (questions.length > 0) {
+      const randomQuestion =
+        questions[Math.floor(Math.random() * questions.length)];
+      setCurrentQuestion(randomQuestion);
     }
   };
 
   const submitInterview = async () => {
-    console.log('Submit button clicked');
-    console.log('Recorded chunks length:', recordedChunks.length);
-    console.log('Media recorder state:', mediaRecorder?.state);
-    
-    // Stop recording if still recording
-    if (mediaRecorder && mediaRecorder.state === 'recording') {
-      console.log('Stopping recording before submit');
+    if (mediaRecorder && mediaRecorder.state === "recording") {
       mediaRecorder.stop();
-      // Wait a moment for the stop event to process
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 
     if (!recordedChunks.length) {
-      console.log('No recording found');
-      alert('No recording found. Please record your interview first.');
+      alert("No recording found. Please record your interview first.");
       return;
     }
 
     setIsUploading(true);
-    console.log('Starting upload process');
 
     try {
-      // Create blob from recorded chunks
-      const blob = new Blob(recordedChunks, { type: 'video/webm' });
-      console.log('Blob created, size:', blob.size);
-      
-      // Create FormData for file upload
+      const blob = new Blob(recordedChunks, { type: "video/webm" });
       const formData = new FormData();
-      formData.append('video', blob, 'interview.webm');
-      console.log('FormData created');
+      formData.append("video", blob, "interview.webm");
 
-      // Upload to backend
-      console.log('Sending request to backend...');
-      const response = await fetch('http://localhost:8000/upload-video', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8000/upload-video", {
+        method: "POST",
         body: formData,
       });
 
-      console.log('Response status:', response.status);
-      console.log('Response headers:', response.headers);
-
       if (response.ok) {
         const result = await response.json();
-        console.log('Success response:', result);
-        alert(`Interview submitted successfully! Confidence Score: ${result.confidence}`);
+        alert(
+          `Interview submitted successfully! Confidence Score: ${result.confidence}`
+        );
       } else {
         const errorText = await response.text();
-        console.error('Error response:', errorText);
         throw new Error(`Upload failed: ${response.status} - ${errorText}`);
       }
     } catch (error) {
-      console.error('Error uploading video:', error);
       alert(`Failed to submit interview. Error: ${error.message}`);
     } finally {
       setIsUploading(false);
@@ -160,7 +143,7 @@ const Interview = () => {
       </div>
 
       <div className="interview-content">
-        {/* Left side - Video recording */}
+        {/* Left side - Video */}
         <div className="video-section">
           <div className="video-container">
             <video
@@ -172,10 +155,10 @@ const Interview = () => {
             />
             {isRecording && <div className="recording-indicator">● REC</div>}
           </div>
-          
+
           <div className="video-controls">
             {!isRecording ? (
-              <button 
+              <button
                 onClick={startRecording}
                 className="control-btn start-btn"
                 disabled={isUploading}
@@ -183,10 +166,7 @@ const Interview = () => {
                 Start Recording
               </button>
             ) : (
-              <button 
-                onClick={stopRecording}
-                className="control-btn stop-btn"
-              >
+              <button onClick={stopRecording} className="control-btn stop-btn">
                 Stop Recording
               </button>
             )}
@@ -196,28 +176,31 @@ const Interview = () => {
         {/* Right side - Questions */}
         <div className="question-section">
           <div className="question-container">
-            <h2>Question {currentQuestion} of {questions.length}</h2>
-            <p className="question-text">{questions[currentQuestion - 1]}</p>
+            {currentQuestion ? (
+              <>
+                <p className="question-text">{currentQuestion}</p>
+              </>
+            ) : (
+              <p>Loading questions...</p>
+            )}
           </div>
 
           <div className="question-controls">
-            {currentQuestion < questions.length ? (
-              <button 
-                onClick={nextQuestion}
-                className="control-btn next-btn"
-                disabled={isUploading}
-              >
-                Next Question
-              </button>
-            ) : (
-              <button 
-                onClick={submitInterview}
-                className="control-btn submit-btn"
-                disabled={isUploading}
-              >
-                {isUploading ? 'Submitting...' : 'Submit Interview'}
-              </button>
-            )}
+            <button
+              onClick={nextQuestion}
+              className="control-btn next-btn"
+              disabled={isUploading}
+            >
+              Next Question
+            </button>
+
+            <button
+              onClick={submitInterview}
+              className="control-btn submit-btn"
+              disabled={isUploading}
+            >
+              {isUploading ? "Submitting..." : "Submit Interview"}
+            </button>
           </div>
         </div>
       </div>
