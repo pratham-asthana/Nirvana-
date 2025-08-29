@@ -51,3 +51,8 @@ def API_Resume(Resume, JD, kw_model):
     ATS_3 = Ats_Enhanced(Resume, JD)
     ATS = ATS_Avg(ATS_1, ATS_2, ATS_3)
     return ATS
+
+def API_Domain(Domain):
+    from Domain_extraction import JD_extraction
+    JD = JD_extraction(Domain)
+    return JD

@@ -71,8 +71,11 @@ const JobDesc = () => {
           </li>
         ))}
       </ul>
+      <div className="confirm-domain-div">
+        <button className="confirm-domain-button">Confirm your Domain</button>
+      </div>
       <div className="resume-main-div">
-        <h3 style={{ fontSize: "20px" }}>Upload Your Resume</h3>
+        <h3 style={{ fontSize: "20px"}}>Upload Your Resume</h3>
         <input
           type="file"
           accept=".pdf,.doc,.docx"
