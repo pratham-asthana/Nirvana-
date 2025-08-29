@@ -2,6 +2,7 @@
 
 def OCR(pdf_path):   #This is extraction of text using OCR. Will only be used if simple extraction doesn't work
     import pytesseract
+    # import easyocr
     from pdf2image import convert_from_path
     try:
         images = convert_from_path(pdf_path)
