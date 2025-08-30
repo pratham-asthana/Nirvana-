@@ -48,6 +48,10 @@ const PopUp = () => {
         <div className="modal-overlay">
           <div className="modal">
             <h3>Enter Domain Code</h3>
+            <p>
+              A-Web Dev | B-Data Science | C-Android Dev | D-UI/UX Design |
+              E-DevOps Engineer | F-Product Management
+            </p>
             <input
               type="text"
               maxLength={1}
