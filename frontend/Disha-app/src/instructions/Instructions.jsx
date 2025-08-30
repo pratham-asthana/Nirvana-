@@ -104,7 +104,13 @@ const Instructions = () => {
         className="important-note-main-div"
         initial={{ opacity: 0, y: 20 }}
         animate={noteInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ type: "spring", stiffness: 50, damping: 20, duration: 0.8, delay: 0.15 + instructions.length * 0.13 + 0.2}}
+        transition={{
+          type: "spring",
+          stiffness: 50,
+          damping: 20,
+          duration: 0.8,
+          delay: 0.15 + instructions.length * 0.13 + 0.2,
+        }}
       >
         <div className="important-note-icon-outer-div">
           <div className="important-note-icon-div">

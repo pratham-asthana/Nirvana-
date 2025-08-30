@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "./JobDesc.css";
 import { db } from "../config/firebase-config";
@@ -71,18 +71,16 @@ const JobDesc = () => {
           </li>
         ))}
       </ul>
-      <div className="confirm-domain-div">
-        <button className="confirm-domain-button">Confirm your Domain</button>
-      </div>
+
       <div className="resume-main-div">
-        <h3 style={{ fontSize: "20px"}}>Upload Your Resume</h3>
+        <h3 style={{ fontSize: "20px" }}>Upload Your Resume</h3>
         <input
           type="file"
           accept=".pdf,.doc,.docx"
           onChange={handleFileChange}
           className="input-container"
         />
-        <button onClick={handleUpload} className="upload-resume-button" >
+        <button onClick={handleUpload} className="upload-resume-button">
           Upload Resume
         </button>
       </div>

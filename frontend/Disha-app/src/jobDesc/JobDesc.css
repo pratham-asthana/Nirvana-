@@ -96,15 +96,3 @@
 .input-container:hover {
   border: 1px solid rgb(0, 0, 0);
 }
-.confirm-domain-button{
-  margin-top: 20px;
-  margin-left: 43%;
-  padding: 10px;
-  border: none;
-  background: linear-gradient(to right, rgb(183, 183, 224), rgb(77, 77, 164));
-  color: white;
-  font-weight: 500;
-  font-size: 15px;
-  border-radius: 10px;
-  cursor: pointer;
-}

@@ -103,3 +103,6 @@
   height: 40px;
   border-radius: 50%;
 }
+.confirm-domain-button {
+  padding: 10px;
+}
