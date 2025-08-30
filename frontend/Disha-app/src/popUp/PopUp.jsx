@@ -42,7 +42,12 @@ const PopUp = () => {
 
   return (
     <div>
-      <button onClick={() => setShowPopUp(true)}>Confirm Your Domain</button>
+      <button
+        onClick={() => setShowPopUp(true)}
+        className="main-confirm-button"
+      >
+        Confirm Your Domain
+      </button>
 
       {showPopUp && (
         <div className="modal-overlay">

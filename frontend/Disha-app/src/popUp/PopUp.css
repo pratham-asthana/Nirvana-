@@ -52,8 +52,15 @@
   border-radius: 6px;
   cursor: pointer;
 }
-
-.modal button {
-  padding: 6px 12px;
+.main-confirm-button {
+  padding: 8px;
   border: none;
+  background-color: rgb(157, 77, 77);
+  color: white;
+  font-size: 17px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.main-confirm-button:hover {
+  background-color: red;
 }
