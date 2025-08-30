@@ -16,34 +16,18 @@ Lakshay_JD = "Lakshay Gupta (cid:131) 9599235772 # lakshaygupta2002.2.19@gmail.c
 Resume_Text = "Python, C, Pandas, NumPy, scikit-learn, TensorFlow, Streamlit, Matplotlib, NLTK, pyttsx3, Vosk, Sounddevice, Machine Learning, Deep Learning, NLP, Computer Vision, Data Analysis, Data Pre-processing, Predictive Systems, LLMs, LangChain, HuggingFace, RAG, Gemini API, Conversational AI, Resume Assistant, Chatbot, API Integration, STT, TTS, Text Vectorization, LSTM, Sentiment Analysis, GUI, Prompt Engineering, Open-source LLMs, ATS-friendly, End-to-End Pipeline, Hackathon, Problem-solving, Passion for AI/ML, Intelligent Systems, GenAI Solutions, Team Player, Growth Mindset, Quick Learner, Real-world Projects, Project Ownership, Innovation, Competitive Achievement, Leadership, Content Head, Communication, Adaptability, Creativity"
 JD_Text = "AI/ML Intern, Machine Learning, AI-driven Solutions, Data Preprocessing, Model Training, Model Evaluation, Model Deployment, Real-world Applications, Collecting Datasets, Cleaning Datasets, Preprocessing Datasets, Feature Engineering, Optimize Models, Performance Optimization, APIs, Cloud Platforms, AWS, GCP, Azure, PyTorch, TensorFlow, Scikit-learn, Keras, Python, Pandas, NumPy, Matplotlib, AI Algorithms, State-of-the-art, Documentation, Code Repositories, Git, Brainstorming, Prototyping, Computer Science, Data Science, Regression, Classification, Clustering, Deep Learning, Model Evaluation Metrics, Problem-solving, Eagerness to Learn, NLP, Computer Vision, Reinforcement Learning, SQL, NoSQL, Databases, AWS Sagemaker, GCP AI Platform, Azure ML, GitHub, Version Control, Research, Open-source Projects"
 
-#Keybert import
-from keybert import KeyBERT
-kw_model = KeyBERT()
 
+Domain = "A"
 #Calculating ATS
-print("Akshat's Resume:")
-from Connector import API_Resume
-ATS = API_Resume(text, JD, kw_model)
-print("ATS_Avg:", ATS)
+from Do_Main import JD_extraction
+JD = JD_extraction(Domain)
+# print(JD)
 
-print("\nPratham's Resume:")
-from Connector import API_Resume
-ATS = API_Resume(Pratham_text, JD, kw_model)
-print("ATS_Avg:", ATS)
+Resume_pdf_path = "C:/Users/akshat/Desktop/python projects/Projects/Nirvana-/backend/Akshat/uploaded_resume.pdf"
+from Res_Main import Resume_ATS_Score
+ATS_Score = Resume_ATS_Score(Resume_pdf_path, JD_Text)
+# print(ATS_Score)
 
-print("\nDisha's Resume:")
-from Connector import API_Resume
-ATS = API_Resume(Disha_text, JD_Disha, kw_model)
-print("ATS_Avg:", ATS)
-
-print("\nLakshay's Resume:")
-from Connector import API_Resume
-ATS = API_Resume(Lakshay_text, Lakshay_JD, kw_model)
-print("ATS_Avg:", ATS)
-
-#Checking Answer
-from Connector import API_QNA
-Measure = API_QNA(User_Answer, Question)
-print("Measure for first question:", Measure)
-Measure = API_QNA(User_Answer, Question_2)
-print("Measure for second question:", Measure)
+from QNA_Main import Measure
+Measure = Measure(Question, User_Answer)
+print(Measure)
