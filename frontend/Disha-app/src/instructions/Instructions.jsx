@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, useInView } from "framer-motion";
 import "./Instructions.css";
 import { LuLaptop } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
@@ -21,13 +22,6 @@ const iconMap = {
 const Instructions = () => {
   const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
-
-  const handleStart = () => {
-    if (checked) {
-      navigate("/interview");
-    }
-  };
-
   const [instructions, setInstructions] = useState([]);
 
   useEffect(() => {
@@ -46,17 +40,38 @@ const Instructions = () => {
     fetchInstructions();
   }, []);
 
+  const handleStart = () => {
+    if (checked) {
+      navigate("/interview");
+    }
+  };
+
+  const noteRef = useRef(null);
+  const noteInView = useInView(noteRef, { once: true, margin: "-100px" });
+
   return (
     <>
       <div className="instructions-header">
         <h1>Interview Instructions</h1>
         <h5>Please read carefully before starting your interview</h5>
       </div>
+
       <div className="instructions-main-div">
         {instructions.map((item, index) => {
           const IconComponent = iconMap[item.icon];
           return (
-            <div className="instruction-1" key={item.id}>
+            <motion.div
+              key={item.id}
+              className="instruction-1"
+              initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 80,
+                damping: 20,
+                delay: 0.15 + index * 0.13,
+              }}
+            >
               <div className="serial-no-div-div">
                 <div className="serial-no-div">{item.serialNo}</div>
               </div>
@@ -79,11 +94,18 @@ const Instructions = () => {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>
-      <div className="important-note-main-div">
+
+      <motion.div
+        ref={noteRef}
+        className="important-note-main-div"
+        initial={{ opacity: 0, y: 20 }}
+        animate={noteInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ type: "spring", stiffness: 50, damping: 20, duration: 0.8, delay: 0.15 + instructions.length * 0.13 + 0.2}}
+      >
         <div className="important-note-icon-outer-div">
           <div className="important-note-icon-div">
             <MdOutlineDangerous size={"28px"} color="white" />
@@ -95,7 +117,8 @@ const Instructions = () => {
           <li>Once started, the interview cannot be paused.</li>
           <li>Make sure you are alone and undisturbed.</li>
         </div>
-      </div>
+      </motion.div>
+
       <div
         style={{
           display: "flex",
@@ -127,7 +150,7 @@ const Instructions = () => {
               borderRadius: "10%",
               border: "1px solid blue",
             }}
-          ></input>
+          />
           <label
             htmlFor="read-instructions"
             style={{

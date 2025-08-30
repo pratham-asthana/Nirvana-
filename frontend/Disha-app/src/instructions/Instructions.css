@@ -10,6 +10,7 @@
   font-size: 2.5rem;
   font-weight: 600;
   background: linear-gradient(to right, blue, rgb(126, 126, 208));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
