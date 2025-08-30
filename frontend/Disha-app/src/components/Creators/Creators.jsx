@@ -12,12 +12,12 @@ const creators = [
   },
   {
     name: "Pratham Asthana",
-    github: "",
+    github: "https://github.com/pratham-asthana",
     img: pratham,
   },
   {
     name: "Disha Gupta",
-    github: "",
+    github: "https://github.com/Disha-arch",
     img: disha,
   },
   {
