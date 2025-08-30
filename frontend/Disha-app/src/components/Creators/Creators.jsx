@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
+import aryan from '../../assets/aryan.jpg'
+import akshat from '../../assets/akshat.jpg'
 import "./Creators.css";
 const creators = [
   {
-    name: "Creator One",
-    github: "",
-    img: "/assets/creator1.jpg",
+    name: "Aryan Verma",
+    github: "https://github.com/Aryanv-0908",
+    img: aryan,
   },
   {
     name: "Creator Two",
@@ -17,9 +19,9 @@ const creators = [
     img: "/assets/creator3.jpg",
   },
   {
-    name: "Creator Four",
-    github: "",
-    img: "/assets/creator4.jpg",
+    name: "Akshat Lamba",
+    github: "https://github.com/akshatlamba1",
+    img: akshat,
   },
 ];
 
