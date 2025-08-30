@@ -10,6 +10,7 @@ import { HiOutlinePaperAirplane } from "react-icons/hi";
 import { MdOutlineDangerous } from "react-icons/md";
 import { db } from "../config/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
+import PopUp from "../popUp/PopUp";
 
 const iconMap = {
   LuLaptop: LuLaptop,
@@ -134,6 +135,7 @@ const Instructions = () => {
           gap: "0",
         }}
       >
+        <PopUp />
         <div
           style={{
             display: "flex",
