@@ -1,10 +1,4 @@
-# Core requirements
-torch                   # For GPU acceleration (install CUDA-specific version if needed)
-ffmpeg-python           # Python wrapper for ffmpeg (ffmpeg itself must be installed & added to PATH)
-
-# Whisper (OpenAI speech recognition)
-openai-whisper
-
+Requirements
 # OCR
 pytesseract
 pdf2image
@@ -14,7 +8,7 @@ pdfplumber
 nltk
 keybert
 sentence-transformers    # Needed for KeyBERT to use all-MiniLM-L6-v2
-
+sklearn - tfidfvectorizer, countvectorizer, cosinesimilarity
 # Environment variables
 python-dotenv
 
