@@ -7,22 +7,22 @@ import "./Creators.css";
 const creators = [
   {
     name: "Aryan Verma",
-    github: "https://github.com/Aryanv-0908",
+    linkedin: "https://www.linkedin.com/in/aryan-verma-aa8a04263/",
     img: aryan,
   },
   {
     name: "Pratham Asthana",
-    github: "https://github.com/pratham-asthana",
+    linkedin: "https://www.linkedin.com/in/pratham-asthana-243133265/",
     img: pratham,
   },
   {
     name: "Disha Gupta",
-    github: "https://github.com/Disha-arch",
+    linkedin: "https://www.linkedin.com/in/disha-gupta-a4707b24a/",
     img: disha,
   },
   {
     name: "Akshat",
-    github: "https://github.com/akshatlamba1",
+    linkedin: "https://www.linkedin.com/in/akshat-lamba-a56011370/",
     img: akshat,
   },
 ];
@@ -53,10 +53,10 @@ const Creators = () => {
     >
       <h2 className="creators-title">Meet Our Team</h2>
       <div className="creators-container">
-        {creators.map(({ name, github, img }, index) => (
+        {creators.map(({ name, linkedin, img }, index) => (
           <div key={index} className="creator-card" style={{ animationDelay: `${index * 0.2}s` }}>
             <img src={img} alt={`${name}`} className="creator-image" />
-            <a href={github} target="_blank" rel="noopener noreferrer" className="creator-name">
+            <a href={linkedin} target="_blank" rel="noopener noreferrer" className="creator-name">
               {name}
             </a>
           </div>

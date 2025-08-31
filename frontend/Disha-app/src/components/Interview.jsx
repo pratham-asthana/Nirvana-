@@ -73,7 +73,7 @@ const Interview = () => {
     }
 
     const recorder = new MediaRecorder(streamRef.current, {
-      mimeType: "video/webm",
+      mimeType: "video/webm;codecs=vp8,opus",
     });
 
     const chunks = [];
@@ -116,6 +116,7 @@ const Interview = () => {
   const submitInterview = async () => {
     if (mediaRecorder && mediaRecorder.state === "recording") {
       mediaRecorder.stop();
+      // Wait for the recorder.onstop to fire and chunks to be updated
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 
@@ -127,11 +128,12 @@ const Interview = () => {
     setIsUploading(true);
 
     try {
-      const blob = new Blob(recordedChunks, { type: "video/webm" });
+      // Create a blob with proper codec information
+      const blob = new Blob(recordedChunks, { type: "video/webm;codecs=vp8,opus" });
       const formData = new FormData();
       formData.append("video", blob, "interview.webm");
 
-      const response = await fetch("http://localhost:8000/upload-video", {
+      const response = await fetch("http://localhost:5000/analyze", {
         method: "POST",
         body: formData,
       });
@@ -139,7 +141,11 @@ const Interview = () => {
       if (response.ok) {
         const result = await response.json();
         alert(
-          `Interview submitted successfully! Confidence Score: ${result.confidence}`
+          `Interview Analysis:\n` +
+          `Speech Confidence: ${(result.speech_confidence * 100).toFixed(1)}%\n` +
+          `Vision Confidence: ${(result.vision_confidence * 100).toFixed(1)}%\n` +
+          `Total Confidence: ${(result.total_confidence * 100).toFixed(1)}%\n` +
+          `${result.disqualified ? 'Warning: Potential disqualification flags detected!' : ''}`
         );
       } else {
         const errorText = await response.text();

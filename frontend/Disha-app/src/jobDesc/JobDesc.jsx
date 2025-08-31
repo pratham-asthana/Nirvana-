@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import "./JobDesc.css";
 import { db } from "../config/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const JobDesc = () => {
   const navigate = useNavigate();
@@ -40,14 +42,15 @@ const JobDesc = () => {
       }
     };
     fetchJob();
+    AOS.init({ duration: 1500 });
   }, [id]);
 
   if (!job) return <p>Loading .......</p>;
 
   return (
     <div>
-      <h1 className="job-desc-heading">Job Description</h1>
-      <h2 className="responsibilities-heading">Responsibilities</h2>
+      <h1 className="job-desc-heading" data-aos="zoom-in-up">Job Description</h1>
+      <h2 className="responsibilities-heading" data-aos="flip-right">Responsibilities</h2>
       <ul style={{ marginBottom: "40px" }}>
         {job.responsibilities?.map((res, i) => (
           <li className="res-list-items" key={i}>
@@ -55,7 +58,7 @@ const JobDesc = () => {
           </li>
         ))}
       </ul>
-      <h2 className="req-heading">Required Skills & Qualifications</h2>
+      <h2 className="req-heading" data-aos="flip-left">Required Skills & Qualifications</h2>
       <ul style={{ marginBottom: "40px" }}>
         {job.skills.map((skill, i) => (
           <li className="req-list-items" key={i}>
@@ -63,7 +66,7 @@ const JobDesc = () => {
           </li>
         ))}
       </ul>
-      <h2 className="what-heading">What we offer</h2>
+      <h2 className="what-heading" data-aos="flip-right">What we offer</h2>
       <ul>
         {job.offer.map((off, i) => (
           <li className="what-list-items" key={i}>

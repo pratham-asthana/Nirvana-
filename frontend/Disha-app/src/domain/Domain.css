@@ -21,6 +21,7 @@
   font-weight: 600;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   background: linear-gradient(to right, rgb(27, 27, 157), rgb(179, 33, 179));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-top: 12px;
