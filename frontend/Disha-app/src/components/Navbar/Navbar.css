@@ -77,3 +77,6 @@
 .btn-primary:hover {
   background: linear-gradient(90deg, #5f4bb6, #751ed9);
 }
+header{
+  position: fixed;
+}
