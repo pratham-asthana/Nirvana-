@@ -16,11 +16,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />}></Route>
           <Route path="/domain" element={<Domain />}></Route>
-          <Route path="/interview" element={<Interview />}></Route>
+          <Route path="/interview/:domainId" element={<Interview />}></Route>
           <Route path="/signIn" element={<SignIn />} />
           <Route path="/signUp" element={<SignUp />} />
-          <Route path="/instructions" element={<Instructions />} />
-          <Route path="/job/:id" element={<JobDesc />}></Route>
+          <Route path="/instructions/:domainId" element={<Instructions />} />
+          <Route path="/jd/:domainId" element={<JobDesc />}></Route>
         </Routes>
       </Router>
     </div>

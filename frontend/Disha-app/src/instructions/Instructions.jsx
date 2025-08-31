@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import "./Instructions.css";
 import { LuLaptop } from "react-icons/lu";
@@ -20,9 +20,10 @@ const iconMap = {
   HiOutlinePaperAirplane: HiOutlinePaperAirplane,
 };
 
-const Instructions = ({ domainId }) => {
+const Instructions = () => {
   const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
+  const { domainId } = useParams();
   const [instructions, setInstructions] = useState([]);
 
   useEffect(() => {

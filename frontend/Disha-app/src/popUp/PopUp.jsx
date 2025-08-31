@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import "./PopUp.css";
 import { db } from "../config/firebase-config";
 import { doc, getDoc } from "firebase/firestore";
@@ -13,8 +14,10 @@ const domainMap = {
 };
 
 const PopUp = () => {
+  const { domainId } = useParams();
   const [showPopUp, setShowPopUp] = useState(false);
   const [domainCode, setDomainCode] = useState("");
+  const navigate = useNavigate();
 
   const handleConfirm = async () => {
     const code = domainCode.trim().toUpperCase();
@@ -38,6 +41,8 @@ const PopUp = () => {
     } catch (error) {
       console.error(error);
     }
+
+    navigate(`/interview/${domainId}`);
   };
 
   return (

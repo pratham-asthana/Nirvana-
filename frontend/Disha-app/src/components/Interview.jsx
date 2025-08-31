@@ -1,18 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 import "./Interview.css";
 
 const Interview = () => {
   const { domainId } = useParams();
   const [isRecording, setIsRecording] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [questions, setQuestions] = useState([]);
-  const [askedQuestions, setAskedQuestions] = useState([]);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [questions, setQuestions] = useState([]);
 
   const videoRef = useRef(null);
   const streamRef = useRef(null);
@@ -22,25 +20,22 @@ const Interview = () => {
       try {
         const docRef = doc(db, "questions", domainId);
         const docSnap = await getDoc(docRef);
-
         if (docSnap.exists()) {
           const data = docSnap.data();
-          const questionsList = Object.values(data);
-          setQuestions(questionsList);
-
-          if (questionsList.length > 0) {
-            setCurrentQuestion(
-              questionsList[Math.floor(Math.random() * questionsList.length)]
-            );
-          }
+          const qArray = Object.values(data);
+          setQuestions(qArray);
         } else {
-          console.log("No such domain questions found !");
+          console.log("No such questions found for this domain !");
+          setQuestions([]);
         }
       } catch (err) {
         console.error(err);
       }
     };
     fetchQuestions();
+  }, [domainId]);
+
+  useEffect(() => {
     initializeCamera();
 
     return () => {
@@ -48,7 +43,7 @@ const Interview = () => {
         streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
-  }, [domainId]);
+  }, []);
 
   const initializeCamera = async () => {
     try {
@@ -101,22 +96,9 @@ const Interview = () => {
     }
   };
 
-  const nextQuestion = () => {
-    const remaining = questions.filter((q) => !askedQuestions.includes(q));
-    if (remaining.length === 0) {
-      alert("You have answered all questions!");
-      return;
-    }
-    const randomQuestion =
-      remaining[Math.floor(Math.random() * remaining.length)];
-    setCurrentQuestion(randomQuestion);
-    setAskedQuestions([...askedQuestions, randomQuestion]);
-  };
-
   const submitInterview = async () => {
     if (mediaRecorder && mediaRecorder.state === "recording") {
       mediaRecorder.stop();
-      // Wait for the recorder.onstop to fire and chunks to be updated
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 
@@ -128,7 +110,6 @@ const Interview = () => {
     setIsUploading(true);
 
     try {
-      // Create a blob with proper codec information
       const blob = new Blob(recordedChunks, {
         type: "video/webm;codecs=vp8,opus",
       });
@@ -210,34 +191,25 @@ const Interview = () => {
         </div>
 
         {/* Right side - Questions */}
-        <div className="question-section">
-          <div className="question-container">
-            {currentQuestion ? (
-              <>
-                <p className="question-text">{currentQuestion}</p>
-              </>
-            ) : (
-              <p>Loading questions...</p>
-            )}
-          </div>
+        <div className="questions-section">
+          <h2>Questions</h2>
+          {questions.length > 0 ? (
+            <ol>
+              {questions.map((q, idx) => (
+                <li key={idx}>{q}</li>
+              ))}
+            </ol>
+          ) : (
+            <p>No questions found for this domain.</p>
+          )}
 
-          <div className="question-controls">
-            <button
-              onClick={nextQuestion}
-              className="control-btn next-btn"
-              disabled={isUploading}
-            >
-              Next Question
-            </button>
-
-            <button
-              onClick={submitInterview}
-              className="control-btn submit-btn"
-              disabled={isUploading}
-            >
-              {isUploading ? "Submitting..." : "Submit Interview"}
-            </button>
-          </div>
+          <button
+            onClick={submitInterview}
+            className="control-btn submit-btn"
+            disabled={isUploading}
+          >
+            {isUploading ? "Uploading..." : "Submit Interview"}
+          </button>
         </div>
       </div>
     </div>

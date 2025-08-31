@@ -11,8 +11,8 @@ import { FiTarget } from "react-icons/fi";
 import { PiCopyright } from "react-icons/pi";
 import { db } from "../config/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const iconMap = {
   IoCode: IoCode,
@@ -31,11 +31,11 @@ const Domain = () => {
     const fetchDomains = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "domain"));
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setDomains(data);
+        const domainList = [];
+        querySnapshot.forEach((doc) => {
+          domainList.push({ id: doc.id, ...doc.data() });
+        });
+        setDomains(domainList);
       } catch (error) {
         console.error(error);
       }
@@ -43,6 +43,10 @@ const Domain = () => {
     fetchDomains();
     AOS.init({ duration: 1500 });
   }, []);
+
+  const handleViewJD = (domainId) => {
+    navigate(`/jd/${domainId}`);
+  };
 
   return (
     <div className="domain-page-main-div">
@@ -55,7 +59,7 @@ const Domain = () => {
         </p>
       </div>
       <div className="domain-cards-container-main-div" data-aos="zoom-in">
-        {domains.map((item, index) => {
+        {domains.map((item) => {
           const IconComponent = iconMap[item.icon];
           return (
             <div className="domain-card-div" key={item.id}>
@@ -72,7 +76,7 @@ const Domain = () => {
               </div>
               <div
                 className="domain-card-button-arrow"
-                onClick={() => navigate(`/job/${item.id}`)}
+                onClick={() => handleViewJD(item.id)}
               >
                 <button className="view-jd-button">View Job Description</button>
                 <FaArrowRightLong />
