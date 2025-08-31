@@ -1,12 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { useParams } from "react-router-dom";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 import "./Interview.css";
 
 const Interview = () => {
+  const { domainId } = useParams();
   const [isRecording, setIsRecording] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [questions, setQuestions] = useState([]);
+  const [askedQuestions, setAskedQuestions] = useState([]);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [recordedChunks, setRecordedChunks] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
@@ -16,15 +19,25 @@ const Interview = () => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const querySnapshot = await getDocs(collection(db, "questions"));
-      const questionsList = querySnapshot.docs.map((doc) => doc.data().text);
-      setQuestions(questionsList);
+      try {
+        const docRef = doc(db, "questions", domainId);
+        const docSnap = await getDoc(docRef);
 
-      // Pick first random question
-      if (questionsList.length > 0) {
-        setCurrentQuestion(
-          questionsList[Math.floor(Math.random() * questionsList.length)]
-        );
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const questionsList = object.values(data);
+          setQuestions(questionsList);
+
+          if (questionsList.length > 0) {
+            setCurrentQuestion(
+              questionsList[Math.floor(Math.random() * questionsList.length)]
+            );
+          }
+        } else {
+          console.log("No such domain questions found !");
+        }
+      } catch (err) {
+        console.error(err);
       }
     };
     fetchQuestions();
@@ -35,7 +48,7 @@ const Interview = () => {
         streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
-  }, []);
+  }, [domainId]);
 
   const initializeCamera = async () => {
     try {
@@ -89,11 +102,15 @@ const Interview = () => {
   };
 
   const nextQuestion = () => {
-    if (questions.length > 0) {
-      const randomQuestion =
-        questions[Math.floor(Math.random() * questions.length)];
-      setCurrentQuestion(randomQuestion);
+    const remaining = questions.filter((q) => !askedQuestions.includes(q));
+    if (remaining.length === 0) {
+      alert("You have answered all questions!");
+      return;
     }
+    const randomQuestion =
+      remaining[Math.floor(Math.random() * remaining.length)];
+    setCurrentQuestion(randomQuestion);
+    setAskedQuestions([...askedQuestions, randomQuestion]);
   };
 
   const submitInterview = async () => {
@@ -152,6 +169,7 @@ const Interview = () => {
               muted
               playsInline
               className="video-preview"
+              controls={false}
             />
             {isRecording && <div className="recording-indicator">● REC</div>}
           </div>

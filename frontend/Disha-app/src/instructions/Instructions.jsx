@@ -20,7 +20,7 @@ const iconMap = {
   HiOutlinePaperAirplane: HiOutlinePaperAirplane,
 };
 
-const Instructions = () => {
+const Instructions = ({ domainId }) => {
   const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
   const [instructions, setInstructions] = useState([]);
@@ -43,7 +43,7 @@ const Instructions = () => {
 
   const handleStart = () => {
     if (checked) {
-      navigate("/interview");
+      navigate(`/interview/${domainId}`);
     }
   };
 
