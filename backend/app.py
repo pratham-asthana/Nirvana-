@@ -24,8 +24,16 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/analyze', methods=['POST'])
+@app.route('/analyze', methods=['POST', 'OPTIONS'])
 def analyze_video():
+    # Handle preflight CORS request
+    if request.method == 'OPTIONS':
+        response = jsonify({'status': 'OK'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        return response
+    
     print("=== Received video analysis request ===")
     
     if 'video' not in request.files:
@@ -63,6 +71,7 @@ def analyze_video():
             print(f"Flags: {flags}")
             print(f"Disqualified: {disqualified}")
             print("=============================\n")
+            sys.stdout.flush()  # Force output to appear immediately
             
             # Prepare response
             response = {
@@ -80,13 +89,14 @@ def analyze_video():
             return jsonify({'error': str(e)}), 500
         
         finally:
-            # Clean up the temporary file
-            if os.path.exists(temp_filepath):
-                try:
-                    os.remove(temp_filepath)
-                    print(f"Temporary file cleaned up: {temp_filepath}")
-                except Exception as cleanup_error:
-                    print(f"Warning: Could not clean up file {temp_filepath}: {cleanup_error}")
+            # Clean up the temporary file (disabled for debugging)
+            # if os.path.exists(temp_filepath):
+            #     try:
+            #         os.remove(temp_filepath)
+            #         print(f"Temporary file cleaned up: {temp_filepath}")
+            #     except Exception as cleanup_error:
+            #         print(f"Warning: Could not clean up file {temp_filepath}: {cleanup_error}")
+            pass
     
     print("Error: Invalid file type")
     return jsonify({'error': 'Invalid file type'}), 400
@@ -95,5 +105,14 @@ def analyze_video():
 def health_check():
     return jsonify({'status': 'healthy'})
 
+@app.route('/test-upload', methods=['POST'])
+def test_upload():
+    print("=== Test upload endpoint ===")
+    if 'video' in request.files:
+        file = request.files['video']
+        print(f"Received test file: {file.filename}, Size: {len(file.read())} bytes")
+        return jsonify({'status': 'Test upload successful', 'filename': file.filename})
+    return jsonify({'error': 'No file received'}), 400
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True, use_reloader=False)
