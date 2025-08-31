@@ -11,6 +11,8 @@ import { FiTarget } from "react-icons/fi";
 import { PiCopyright } from "react-icons/pi";
 import { db } from "../config/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const iconMap = {
   IoCode: IoCode,
@@ -39,6 +41,7 @@ const Domain = () => {
       }
     };
     fetchDomains();
+    AOS.init({ duration: 1500 });
   }, []);
 
   return (
@@ -51,7 +54,7 @@ const Domain = () => {
           innovation.
         </p>
       </div>
-      <div className="domain-cards-container-main-div">
+      <div className="domain-cards-container-main-div" data-aos="zoom-in">
         {domains.map((item, index) => {
           const IconComponent = iconMap[item.icon];
           return (
