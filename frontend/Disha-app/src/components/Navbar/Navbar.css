@@ -6,6 +6,7 @@
   background: #1e1e2f;
   padding: 15px 35px;
 }
+
 .logo {
   font-size: 1.6em;
   font-weight: bold;
@@ -77,3 +78,4 @@
 .btn-primary:hover {
   background: linear-gradient(90deg, #5f4bb6, #751ed9);
 }
+
