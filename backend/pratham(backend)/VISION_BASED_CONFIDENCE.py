@@ -55,6 +55,6 @@ def visual_confidence(video_path):
         
     frame.release()
 
-    vision_confidence = round(np.mean(vision_confidence_frames)*1.3) if vision_confidence_frames else 0
+    vision_confidence = round(np.mean(vision_confidence_frames)) if vision_confidence_frames else 0
     
     return vision_confidence

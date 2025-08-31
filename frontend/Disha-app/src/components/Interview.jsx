@@ -125,15 +125,18 @@ const Interview = () => {
         const result = await response.json();
         alert(
           `Interview Analysis:\n` +
-            `Speech Confidence: ${(result.speech_confidence * 100).toFixed(
+            `Speech Confidence: ${(result.speech_confidence).toFixed(
               1
             )}%\n` +
-            `Vision Confidence: ${(result.vision_confidence * 100).toFixed(
+            `Vision Confidence: ${(result.vision_confidence).toFixed(
               1
             )}%\n` +
-            `Total Confidence: ${(result.total_confidence * 100).toFixed(
+            `Total Confidence: ${(result.total_confidence).toFixed(
               1
             )}%\n` +
+            `Flags: ${(result.flags).toFixed(
+              1
+            )}\n` +
             `${
               result.disqualified
                 ? "Warning: Potential disqualification flags detected!"
