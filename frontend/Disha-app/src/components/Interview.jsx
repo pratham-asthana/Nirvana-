@@ -25,7 +25,7 @@ const Interview = () => {
 
         if (docSnap.exists()) {
           const data = docSnap.data();
-          const questionsList = object.values(data);
+          const questionsList = Object.values(data);
           setQuestions(questionsList);
 
           if (questionsList.length > 0) {
@@ -129,7 +129,9 @@ const Interview = () => {
 
     try {
       // Create a blob with proper codec information
-      const blob = new Blob(recordedChunks, { type: "video/webm;codecs=vp8,opus" });
+      const blob = new Blob(recordedChunks, {
+        type: "video/webm;codecs=vp8,opus",
+      });
       const formData = new FormData();
       formData.append("video", blob, "interview.webm");
 
@@ -142,10 +144,20 @@ const Interview = () => {
         const result = await response.json();
         alert(
           `Interview Analysis:\n` +
-          `Speech Confidence: ${(result.speech_confidence * 100).toFixed(1)}%\n` +
-          `Vision Confidence: ${(result.vision_confidence * 100).toFixed(1)}%\n` +
-          `Total Confidence: ${(result.total_confidence * 100).toFixed(1)}%\n` +
-          `${result.disqualified ? 'Warning: Potential disqualification flags detected!' : ''}`
+            `Speech Confidence: ${(result.speech_confidence * 100).toFixed(
+              1
+            )}%\n` +
+            `Vision Confidence: ${(result.vision_confidence * 100).toFixed(
+              1
+            )}%\n` +
+            `Total Confidence: ${(result.total_confidence * 100).toFixed(
+              1
+            )}%\n` +
+            `${
+              result.disqualified
+                ? "Warning: Potential disqualification flags detected!"
+                : ""
+            }`
         );
       } else {
         const errorText = await response.text();
