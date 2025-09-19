@@ -12,7 +12,7 @@ def TTS_edge(text_sample):
     async def main():
         text = text_sample
         # voice = "en-US-AriaNeural" female
-        voice = "en-US-GuyNeural"
+        voice = "en-US-GuyNeural" #this one is correct
         # voice = "en-GB-SoniaNeural" this one is seductive wala
         # voice = "en-US-ChristopherNeural"
         output = "voice.mp3"
@@ -31,4 +31,4 @@ def TTS_edge(text_sample):
     asyncio.run(main())
 
 # TTS_edge(text_sample)
-TTS_pyttsx3(text_sample)
+# TTS_pyttsx3(text_sample)
