@@ -5,20 +5,16 @@ import sys
 import tempfile
 from flask_cors import CORS
 
-# Add pratham(backend) to Python path
 backend_path = os.path.join(os.path.dirname(__file__), 'pratham(backend)')
 sys.path.append(backend_path)
 
 from MAIN_MAIN import main
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
-
-# Configure upload settings
+CORS(app)  
 UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'pratham(backend)', 'media', 'videos')
 ALLOWED_EXTENSIONS = {'mp4', 'avi', 'mov', 'webm'}
 
-# Ensure upload directory exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def allowed_file(filename):
@@ -26,7 +22,6 @@ def allowed_file(filename):
 
 @app.route('/analyze', methods=['POST', 'OPTIONS'])
 def analyze_video():
-    # Handle preflight CORS request
     if request.method == 'OPTIONS':
         response = jsonify({'status': 'OK'})
         response.headers.add('Access-Control-Allow-Origin', '*')
